@@ -1,0 +1,18 @@
+{
+  "schema_version": 5,
+  "requires": { "capabilities": ["units.v1", "facts.v1"] },
+  "install_rules": [{
+    "id": "smapi-manifest-units",
+    "match": { "any_file_patterns": ["**/manifest.json"] },
+    "declarative": {
+      "units": [{
+        "id": "smapi",
+        "role": "plugin",
+        "selector": { "anchor": "**/manifest.json", "max": 128 },
+        "facts": { "identity": { "base": "package", "path": "manifest.json", "read": "json", "pointer": "/UniqueID" } },
+        "identity_fact": "identity",
+        "target": { "base": "game", "path": "Mods/{{unit.identity}}" }
+      }]
+    }
+  }]
+}

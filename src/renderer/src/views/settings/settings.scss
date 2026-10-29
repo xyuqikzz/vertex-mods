@@ -1,0 +1,315 @@
+// 设置页共用版式（分类内容组件都在 .settings-index 内渲染），只使用 vertex-ui token。
+// 规格见 Vertex 项目文档《设置页 UI 重设计方案》（2026-10-24）。
+
+.settings-index {
+  .setting-group + .setting-group,
+  .setting-group + .tool-notice,
+  .tool-notice + .setting-group,
+  .settings-block + .setting-group,
+  .setting-group + .settings-block {
+    margin-top: 28px;
+  }
+
+  .setting-group__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-4);
+    min-height: 26px;
+    margin: 0 2px var(--space-2);
+  }
+
+  .setting-group__title {
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-base);
+  }
+
+  .setting-group__aside {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    margin-left: auto;
+  }
+
+  .setting-group__meta {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .setting-group__panel {
+    min-width: 0;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+  }
+
+  .setting-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) var(--space-6);
+    padding: var(--space-4) var(--space-5);
+
+    & + .setting-row {
+      border-top: 1px solid var(--color-surface-strong);
+    }
+
+    &.is-stack {
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-3);
+    }
+  }
+
+  .setting-row__text {
+    flex: 1 1 260px;
+    min-width: 0;
+  }
+
+  .setting-row.is-stack .setting-row__text {
+    flex: 0 0 auto;
+  }
+
+  .setting-row__label {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--color-text);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.45;
+  }
+
+  .setting-row__description {
+    margin-top: 3px;
+    color: var(--color-text-muted);
+    font-size: 12.5px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+
+    a {
+      color: var(--color-accent-strong);
+    }
+  }
+
+  .setting-row__control {
+    display: flex;
+    flex: 0 0 auto;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    max-width: 100%;
+  }
+
+  .setting-row.is-stack .setting-row__control {
+    flex: 1 1 auto;
+    flex-wrap: nowrap;
+  }
+
+  // 开关的文字由设置行提供，这里只保留给读屏的名称。
+  .setting-switch > strong {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .setting-switch {
+    min-height: auto;
+  }
+
+  .setting-path {
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    min-width: 0;
+    height: var(--control-height-md);
+    padding: 0 var(--space-3);
+    overflow: hidden;
+    color: var(--color-text-secondary);
+    font-family: var(--font-family-mono);
+    font-size: 12.5px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    background: var(--color-surface-soft);
+    border: 1px solid var(--color-surface-strong);
+    border-radius: var(--radius-md);
+    box-sizing: border-box;
+  }
+
+  .setting-path.is-empty {
+    color: var(--color-text-muted);
+    font-family: var(--font-family-base);
+  }
+
+  .setting-field {
+    flex: 1 1 auto;
+    min-width: 0;
+
+    .vx-field {
+      width: 100%;
+    }
+  }
+
+  .setting-field--narrow {
+    flex: 0 0 220px;
+    width: 220px;
+  }
+
+  // 危险的次要操作：白底红字，确认弹窗里才出现实心红按钮。
+  .setting-danger-button.vx-button-secondary,
+  .setting-danger-button.vx-button-ghost {
+    color: var(--color-danger-strong);
+
+    &:hover:not(:disabled) {
+      color: var(--color-danger-strong);
+      background: var(--color-danger-soft);
+    }
+  }
+
+  .setting-danger-button.vx-button-secondary {
+    border-color: color-mix(in srgb, var(--color-danger) 28%, var(--color-white));
+  }
+
+  .setting-link-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0;
+    color: var(--color-accent-strong);
+    font: inherit;
+    font-size: 12.5px;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--color-accent-active);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  }
+
+  .setting-steps {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    list-style: none;
+    counter-reset: setting-step;
+
+    li {
+      display: flex;
+      gap: 10px;
+      counter-increment: setting-step;
+
+      &::before {
+        display: grid;
+        flex: 0 0 auto;
+        place-items: center;
+        width: 20px;
+        height: 20px;
+        margin-top: 1px;
+        color: var(--color-text-secondary);
+        font-size: var(--font-size-xs);
+        font-weight: var(--font-weight-semibold);
+        content: counter(setting-step);
+        background: var(--color-surface-hover);
+        border-radius: 50%;
+      }
+    }
+
+    a {
+      color: var(--color-accent-strong);
+    }
+  }
+
+  .setting-account {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3) 14px;
+    padding: 18px var(--space-5);
+  }
+
+  .setting-account__avatar {
+    display: grid;
+    flex: 0 0 auto;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    overflow: hidden;
+    color: var(--color-text-secondary);
+    font-size: 15px;
+    font-weight: var(--font-weight-semibold);
+    background: var(--color-surface-strong);
+    border-radius: 50%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &.is-empty {
+      color: var(--color-text-muted);
+      background: var(--color-surface-hover);
+    }
+  }
+
+  .setting-account__body {
+    flex: 1 1 240px;
+    min-width: 0;
+  }
+
+  .setting-account__name {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    margin: 0;
+    color: var(--color-text);
+    font-size: 15px;
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .setting-account__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .setting-status-line {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin: 0;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+  }
+
+  .setting-inline-error {
+    margin: 0;
+    color: var(--color-danger-strong);
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
+}

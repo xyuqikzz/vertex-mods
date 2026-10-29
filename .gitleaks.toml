@@ -1,0 +1,23 @@
+title = "Vertex public source secret scanning"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "vertex-modio-api-key"
+description = "Nonempty mod.io key in build-time configuration"
+regex = '''(?i)VITE_MODIO_API_KEY\s*=\s*["']?([a-f0-9]{32})'''
+secretGroup = 1
+
+# CI 扫描全部 Git 历史；已删除夹具的固定公开测试值仍需保留精确豁免。
+
+[[allowlists]]
+description = "Public loopback HTTPS fixture; never used by the application"
+paths = ['''^scripts/fixtures/nexus-https-key\.pem$''']
+
+[[allowlists]]
+description = "Known synthetic token used only by the isolated stage-5 smoke fixture"
+condition = "AND"
+paths = ['''^scripts/stage5-pages-smoke\.mjs$''']
+regexTarget = "secret"
+regexes = ['''^stage5-fixture$''']

@@ -1,0 +1,102 @@
+appId: com.yuqikzz.vertex
+productName: Vertex
+copyright: Copyright © 2025 YuQiKzz
+
+publish: null # 发行配置由 electron-builder.config.cjs 统一读取
+
+directories:
+  buildResources: resources
+  output: dist
+
+files:
+  - 'out/main/**'
+  - 'out/preload/**'
+  - 'out/renderer/**'
+  - '!node_modules/onnxruntime-node/bin/napi-v6/darwin/**'
+  - '!node_modules/onnxruntime-node/bin/napi-v6/linux/**'
+  - '!node_modules/onnxruntime-node/bin/napi-v6/win32/arm64/**'
+  - '!node_modules/better-sqlite3/build/Release/*.iobj'
+  - '!node_modules/better-sqlite3/build/Release/*.ipdb'
+  - '!node_modules/better-sqlite3/build/Release/*.lib'
+  - '!node_modules/better-sqlite3/build/Release/obj/**'
+  - '!node_modules/better-sqlite3/build/deps/**'
+  - '!node_modules/better-sqlite3/deps/**'
+  - '!node_modules/better-sqlite3/src/**'
+  - '!**/*.md'
+  - '!**/*.log'
+  - '!**/*.map'
+  - '!**/*.ts'
+  - '!**/*.vue'
+  - '!**/*.test.*'
+  - '!**/__tests__/**'
+  - '!test'
+  - '!src'
+  - '!node_modules/.cache'
+  - '!**/.git*'
+  - '!**/.idea'
+  - '!**/.vscode'
+  - '!**/*.config.js'
+  - '!**/*.yml'
+  - '!README.md'
+  - '!.editorconfig'
+  - '!.env'
+  - '!.prettier*'
+  - '!.nvmrc'
+  - '!.npmrc'
+
+asar: true
+beforePack: scripts/prepare-package.mjs
+afterPack: scripts/prepare-dlss-payload.mjs
+compression: maximum
+asarUnpack:
+  - '**/better-sqlite3/**'
+  - '**/node-screenshots/**'
+
+extraResources:
+  - from: LICENSE
+    to: resources/licenses/Vertex-LICENSE.txt
+  - from: THIRD_PARTY_NOTICES.md
+    to: resources/licenses/THIRD_PARTY_NOTICES.txt
+  - from: resources
+    to: resources
+  - from: src/renderer/src/docs
+    to: renderer-docs
+    filter:
+      - install-rule-reference.md
+      - nexus-rule-reference.md
+      - source-install-rule-user-guide.md
+
+icon: icon.ico
+
+# 配置自定义协议
+protocols:
+  - name: 'vertex'
+    schemes: ['vertex'] # 协议名称（无需加 ://）
+  - name: 'nxm'
+    schemes: ['nxm'] # Nexus Mods Manager 下载授权回调协议
+
+fileAssociations:
+  - ext: vxpack
+    name: Vertex 离线安装包
+    description: Vertex 离线安装包
+    role: Editor
+    icon: icon.ico
+
+win:
+  icon: icon.ico # Windows 专用配置
+  executableName: Vertex # 可执行文件名称
+  verifyUpdateCodeSignature: true # 运行期同时验证当前应用与更新包的 Authenticode 发布者
+  signtoolOptions:
+    signingHashAlgorithms: ['sha256', 'sha1'] # 保留签名策略，适配 electron-builder 26 的配置位置
+  requestedExecutionLevel: 'asInvoker' # 与资源管理器保持相同权限，允许原生文件拖入；按需操作单独提权
+
+nsis: # NSIS 安装程序配置
+  artifactName: ${name}-${version}-setup.${ext} # 安装包文件名格式
+  shortcutName: ${productName} # 开始菜单快捷方式名称
+  uninstallDisplayName: ${productName} # 控制面板卸载程序显示名称
+  createDesktopShortcut: always # 是否强制创建桌面快捷方式
+  allowToChangeInstallationDirectory: true # 允许用户自定义安装目录
+  oneClick: false # 是否启用一键安装（禁用则显示自定义选项）
+  differentialPackage: false # 仅生成完整安装包，不生成差异更新 blockmap
+
+npmRebuild: false

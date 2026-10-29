@@ -1,0 +1,211 @@
+name: Build Windows
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: windows-package-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Windows x64 installer
+    runs-on: windows-2022
+    timeout-minutes: 60
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    defaults:
+      run:
+        shell: pwsh
+    env:
+      # 托管 runner 使用上游下载地址，覆盖本机开发使用的镜像配置。
+      npm_config_electron_mirror: https://github.com/electron/electron/releases/download/
+      npm_config_electron_builder_binaries_mirror: https://github.com/electron-userland/electron-builder-binaries/releases/download/
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Scan source history for credentials
+        run: |
+          $zip = Join-Path $env:RUNNER_TEMP 'gitleaks-8.30.1.zip'
+          $tool = Join-Path $env:RUNNER_TEMP 'gitleaks-8.30.1'
+          Invoke-WebRequest -Uri 'https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_windows_x64.zip' -OutFile $zip
+          if ((Get-FileHash -LiteralPath $zip -Algorithm SHA256).Hash.ToLowerInvariant() -ne 'd29144deff3a68aa93ced33dddf84b7fdc26070add4aa0f4513094c8332afc4e') {
+            throw 'Gitleaks archive checksum mismatch'
+          }
+          Expand-Archive -LiteralPath $zip -DestinationPath $tool
+          & (Join-Path $tool 'gitleaks.exe') git . --config .gitleaks.toml --redact=100 --no-banner --log-opts=--all
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Set up Node.js
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '22.16.0'
+          architecture: x64
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Validate version and prepare public configuration
+        id: version
+        run: |
+          $package = Get-Content -Raw package.json | ConvertFrom-Json
+          $version = [string]$package.version
+          if ($version -notmatch '^\d+\.\d+\.\d+$') {
+            throw "Expected a stable package version, received: $version"
+          }
+          if ($env:GITHUB_REF_TYPE -eq 'tag' -and $env:GITHUB_REF_NAME -ne "v$version") {
+            throw "Tag $env:GITHUB_REF_NAME does not match package version $version"
+          }
+          $config = Get-Content -Raw .env.example
+          if ($config -notmatch '(?m)^VITE_APP_VERSION=([^\r\n]+)\r?$' -or $Matches[1] -ne $version) {
+            throw 'The public build configuration and package versions must match'
+          }
+          Copy-Item -LiteralPath .env.example -Destination .env
+          "version=$version" >> $env:GITHUB_OUTPUT
+
+      - name: Install locked dependencies
+        run: |
+          npm install --global npm@10.9.2
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          npm ci --no-audit --no-fund
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Audit dependencies
+        run: |
+          npm audit --audit-level=high --registry=https://registry.npmjs.org
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Prepare pinned compatibility archive
+        run: |
+          # 原 GitHub 归档已下线；镜像必须与仓库锁定的原始大小和 SHA-256 完全一致。
+          $lock = Get-Content -Raw src/main/services/dlss/swapper/payload.json | ConvertFrom-Json
+          $directory = New-Item -ItemType Directory -Path artifacts/ci-downloads -Force
+          $archive = Join-Path $directory.FullName 'DLSS5-Swapper-2.2.7-portable.exe'
+          $url = 'https://downloads.sourceforge.net/project/dlss-5-swapper.mirror/v2.2.7/DLSS5-Swapper-2.2.7-portable.exe'
+          curl.exe --fail --location --silent --show-error --proto '=https' --proto-redir '=https' --retry 2 --max-time 600 --output $archive $url
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          if ((Get-Item -LiteralPath $archive).Length -ne $lock.size) {
+            throw 'Compatibility archive size does not match the pinned source'
+          }
+          if ((Get-FileHash -LiteralPath $archive -Algorithm SHA256).Hash.ToLowerInvariant() -ne $lock.sha256) {
+            throw 'Compatibility archive SHA-256 does not match the pinned source'
+          }
+          # 打包钩子再次校验后只提取锁定的组件，不运行上游安装程序。
+          "VERTEX_DLSS_SWAPPER_ARCHIVE=$archive" >> $env:GITHUB_ENV
+
+      - name: Build Windows installer
+        run: npm run build:win -- --x64
+
+      - name: Collect installer and SHA-256
+        env:
+          VERTEX_BUILD_VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          $installer = Get-Item -LiteralPath "dist/vertex-$env:VERTEX_BUILD_VERSION-setup.exe"
+          if ($installer.Length -eq 0) { throw 'The installer is empty' }
+          $destination = New-Item -ItemType Directory -Path artifacts/windows -Force
+          Copy-Item -LiteralPath $installer.FullName -Destination $destination.FullName
+          $hash = (Get-FileHash -LiteralPath $installer.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+          # 固定使用 LF，供 Windows 和 Linux 发布任务读取同一份校验文件。
+          [System.IO.File]::WriteAllText(
+            (Join-Path $destination.FullName "$($installer.Name).sha256"),
+            "$hash  $($installer.Name)`n",
+            [System.Text.UTF8Encoding]::new($false)
+          )
+          $stream = [System.IO.File]::OpenRead($installer.FullName)
+          try { $sha512 = [Convert]::ToBase64String([System.Security.Cryptography.SHA512]::HashData($stream)) }
+          finally { $stream.Dispose() }
+          $metadata = @(
+            "version: $env:VERTEX_BUILD_VERSION",
+            'files:',
+            "  - url: $($installer.Name)",
+            "    sha512: $sha512",
+            "    size: $($installer.Length)",
+            "path: $($installer.Name)",
+            "sha512: $sha512",
+            "releaseDate: '$([DateTime]::UtcNow.ToString('o'))'"
+          ) -join "`n"
+          [System.IO.File]::WriteAllText((Join-Path $destination.FullName 'latest.yml'), $metadata + "`n", [System.Text.UTF8Encoding]::new($false))
+          "### Vertex $env:VERTEX_BUILD_VERSION — Windows x64" >> $env:GITHUB_STEP_SUMMARY
+          "Installer: $($installer.Name)" >> $env:GITHUB_STEP_SUMMARY
+          "SHA-256: $hash" >> $env:GITHUB_STEP_SUMMARY
+          'This is an unsigned installer. Tag builds are published to GitHub Releases after verification.' >> $env:GITHUB_STEP_SUMMARY
+
+      - name: Upload Windows package
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: Vertex-${{ steps.version.outputs.version }}-windows-x64
+          path: artifacts/windows/
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 30
+
+  release:
+    name: Publish GitHub Release
+    needs: build
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      RELEASE_TAG: ${{ github.ref_name }}
+      RELEASE_VERSION: ${{ needs.build.outputs.version }}
+    steps:
+      - name: Download verified Windows package
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: Vertex-${{ needs.build.outputs.version }}-windows-x64
+          path: release-assets
+
+      - name: Verify and publish installer
+        working-directory: release-assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$RELEASE_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          [[ "$RELEASE_TAG" == "v$RELEASE_VERSION" ]]
+          # 标签在打包后被移动时拒绝发布，避免安装包与源码版本不一致。
+          tag_commit=$(gh api "repos/$GH_REPO/commits/$RELEASE_TAG" --jq '.sha')
+          [[ "$tag_commit" == "$GITHUB_SHA" ]]
+          installer="vertex-$RELEASE_VERSION-setup.exe"
+          checksum="$installer.sha256"
+          test -s "$installer"
+          test -s "$checksum"
+          test -s latest.yml
+          sha256sum --check "$checksum"
+
+          cat > "$RUNNER_TEMP/release-notes.md" <<EOF
+          ## Vertex $RELEASE_VERSION
+
+          ### 简体中文
+          - 平台：Windows x64。
+          - 下载并运行下方的 $installer 安装客户端。
+          - 同名 .sha256 文件用于校验下载完整性。
+          - 当前安装包未进行代码签名。
+
+          ### English
+          - Platform: Windows x64.
+          - Download and run $installer below to install the client.
+          - Use the accompanying .sha256 file to verify download integrity.
+          - This installer is not code-signed.
+
+          Source commit: $GITHUB_SHA
+          EOF
+
+          # gh 先上传附件再发布；已有 Release 不会被静默覆盖。
+          gh release create "$RELEASE_TAG" "$installer" "$checksum" latest.yml \
+            --verify-tag --title "Vertex $RELEASE_VERSION" \
+            --notes-file "$RUNNER_TEMP/release-notes.md"
+          gh release view "$RELEASE_TAG" --json url --jq '.url' >> "$GITHUB_STEP_SUMMARY"

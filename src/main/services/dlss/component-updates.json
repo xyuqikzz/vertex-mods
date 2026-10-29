@@ -1,0 +1,105 @@
+{
+  "renodx-dlss5-6.5.3": {
+    "url": "https://github.com/RankFTW/rhi-repo/releases/download/renodx-dlss5-6.5.3/renodx-dlss5_6.5.3.zip",
+    "sha256": "553b1619b9e5ddfbcb4ebc7f2f3bffff9256a48a25b988f4817f5c63f4caa1de",
+    "size": 370292,
+    "files": [
+      {
+        "name": "renodx-dlss5.addon64",
+        "size": 878080,
+        "sha256": "342341f669f1d64e0c70c8593a07a2fab5075e073dfae97c331c9a6776260a0a"
+      }
+    ]
+  },
+  "renodx-dlss-SF-26.0927.2125": {
+    "url": "https://github.com/RankFTW/rhi-repo/releases/download/renodx-dlss-SF-26.0927.2125/renodx-dlss_SF_26.0927.2125.zip",
+    "sha256": "2ccf4605ea8fd2b3be72d1aee13fad1ae4ef66845845f5db97503eb6f70b00bf",
+    "size": 1123438,
+    "files": [
+      {
+        "name": "renodx-dlss.addon64",
+        "size": 2902016,
+        "sha256": "25600017cf95ad797eabb4e93de694b0dc1fce472999381c114bf44a7692ef60"
+      }
+    ]
+  },
+  "dlss-310.9.1": {
+    "url": "https://github.com/RankFTW/rhi-repo/releases/download/dlss-310.9.1/nvngx_dlss_310.9.1.zip",
+    "sha256": "aaba83b288bd145c3808e8d7a0ba03cc8c8676d18ad984b1bfa6563046a3ba37",
+    "size": 30263723,
+    "files": [
+      {
+        "name": "nvngx_dlss.dll",
+        "size": 58956912,
+        "sha256": "3975567b8943c53acce397f2b72380092f84f162d00b0d2c7d08a1025c563983"
+      }
+    ]
+  },
+  "feeder-1.17.0": {
+    "url": "https://github.com/jlrouzies-fr/DLSS5-Feeder/releases/download/v1.17.0/DLSS5-Feeder-1.17.0.zip",
+    "sha256": "11a96b36ae89ef75b3cff0e03849db35591143fe4df171986502905809469e12",
+    "size": 390753,
+    "files": [
+      {
+        "name": "host64/dlss5-feed-host64.exe",
+        "size": 169472,
+        "sha256": "c835754277a0590780d846443f314a83a30e2d2815ee0b2f7c18f1a24f252936"
+      },
+      {
+        "name": "layer-x64/run-with-feed-layer.bat",
+        "size": 730,
+        "sha256": "bc9aa7964742e23653556be978f540f503f3cef928b6de7a38f77c570bb764f9"
+      },
+      {
+        "name": "layer-x64/VkLayer_feed_vk.dll",
+        "size": 18944,
+        "sha256": "ed5978fff1ac1b2c85aed7b1ffe2c7668e2be71f5a8cff86b4327bfa1d959a28"
+      },
+      {
+        "name": "layer-x64/VkLayer_feed_vk.json",
+        "size": 589,
+        "sha256": "c15967b3f8847a145e21058a1e57e92c595ee17fc5dd23ab3278b0148ad6e9d1"
+      },
+      {
+        "name": "layer-x86/run-with-feed-layer32.bat",
+        "size": 840,
+        "sha256": "75d4584ad01619402a10e0d8342b114613057a1d3b0ac8dbe9280b740090c3e8"
+      },
+      {
+        "name": "layer-x86/VkLayer_feed_vk32.dll",
+        "size": 15872,
+        "sha256": "cbb3039e13ce1a851c00bba24a93586ea8d9731dad3fcf426f412cc764a61860"
+      },
+      {
+        "name": "layer-x86/VkLayer_feed_vk32.json",
+        "size": 584,
+        "sha256": "28f8174eb8fed02266bafa6910eab07922ec6d2bdb33110699c586f74b254921"
+      },
+      {
+        "name": "reshade-shaders/Shaders/DLSS5_Feed.fx",
+        "size": 52600,
+        "sha256": "c4ba1610df8e1593faa7c203d6d0517058d3a8ecf2dfda18ca67849844391456"
+      },
+      {
+        "name": "dlss5-feed.addon32",
+        "size": 189952,
+        "sha256": "bfe24218be719cf5b91d829283953432907922333280931b755d83ac793fd8b2"
+      },
+      {
+        "name": "dlss5-feed.addon64",
+        "size": 329728,
+        "sha256": "6854d012eac307021cd31c978bafd42f1e22c5b7b2922c80e0a0010d428a3fd7"
+      },
+      {
+        "name": "READ-ME-FIRST.txt",
+        "size": 3819,
+        "sha256": "73b7f248bb8b6237dd778472714689811678841ab64359e06dce5cd0c9dfd629"
+      },
+      {
+        "name": "Verify-DLSS5Feeder.ps1",
+        "size": 102574,
+        "sha256": "2cdb0eac0f4f8ea9da8e6290c442f846074aae9b87750425e0d2da4a820d0aca"
+      }
+    ]
+  }
+}

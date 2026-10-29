@@ -1,0 +1,538 @@
+{
+  "game": {
+    "id": "palworld",
+    "name": "Palworld",
+    "engine": "ue5",
+    "binary_path": "${win64_dir}\\Palworld-Win64-Shipping.exe",
+    "domain_name": "palworld",
+    "display_name": "幻兽帕鲁"
+  },
+  "setup": {
+    "default_dependencies": [
+      {
+        "id": "palworld_re_ue4ss",
+        "name": "RE-UE4SS for Palworld",
+        "type": "loader",
+        "notes": "安装模组前必须先下载并安装此默认依赖",
+        "source": "github_release",
+        "install": {
+          "target": {
+            "type": "game_relative",
+            "path": "Pal/Binaries/Win64"
+          },
+          "install_rules": [
+            {
+              "id": "palworld_ue4ss_loader",
+              "name": "UE4SS 加载器完整安装包",
+              "priority": 700,
+              "match": {
+                "all": [
+                  {
+                    "archive": {
+                      "has_file": {
+                        "path": "dwmapi.dll"
+                      }
+                    }
+                  },
+                  {
+                    "archive": {
+                      "has_file": {
+                        "path": "ue4ss/UE4SS.dll"
+                      }
+                    }
+                  }
+                ]
+              },
+              "source": {
+                "type": "package_root",
+                "unwrap_single_root": false
+              },
+              "target": {
+                "type": "game_relative",
+                "path": "Pal/Binaries/Win64"
+              }
+            }
+          ]
+        },
+        "blocking": true,
+        "provider": {
+          "owner": "Okaetsu",
+          "repo": "RE-UE4SS",
+          "asset_name_regex": "^UE4SS-Palworld(?:-g[0-9a-f]+)?\\.zip$"
+        },
+        "required": true
+      }
+    ]
+  },
+  "variables": {
+    "game_dir": "Pal",
+    "paks_dir": "Pal\\Content\\Paks",
+    "win64_dir": "Pal\\Binaries\\Win64",
+    "pak_mods_dir": "Pal\\Content\\Paks\\~mods",
+    "ue4ss_mods_dir": "Pal\\Binaries\\Win64\\ue4ss\\Mods",
+    "user_config_dir": "Pal\\Saved\\Config\\Windows",
+    "palschema_mods_dir": "Pal\\Binaries\\Win64\\ue4ss\\Mods\\PalSchema\\mods"
+  },
+  "game_detect": {
+    "select": {
+      "strategy": "highest_confidence"
+    },
+    "candidates": [
+      {
+        "name": "palworld_steam",
+        "type": "exe_search",
+        "markers": {
+          "all_files": [
+            "Palworld.exe",
+            "Pal\\Binaries\\Win64\\Palworld-Win64-Shipping.exe"
+          ]
+        },
+        "root_from": {
+          "up": 0,
+          "type": "exe_dir"
+        },
+        "confidence": 100
+      },
+      {
+        "name": "palworld_gamepass",
+        "type": "exe_search",
+        "markers": {
+          "all_files": [
+            "Palworld-WinGDK-Shipping.exe"
+          ]
+        },
+        "root_from": {
+          "up": 3,
+          "type": "exe_dir"
+        },
+        "confidence": 90
+      }
+    ]
+  },
+  "install_rules": [
+    {
+      "id": "palworld_ue4ss_loader",
+      "name": "UE4SS 加载器完整安装包",
+      "priority": 700,
+      "match": {
+        "all": [
+          {
+            "archive": {
+              "has_file": {
+                "path": "dwmapi.dll"
+              }
+            }
+          },
+          {
+            "archive": {
+              "has_file": {
+                "path": "ue4ss/UE4SS.dll"
+              }
+            }
+          }
+        ]
+      },
+      "source": {
+        "type": "package_root",
+        "unwrap_single_root": false
+      },
+      "target": {
+        "type": "game_relative",
+        "path": "Pal/Binaries/Win64"
+      }
+    },
+    {
+      "id": "pal_runnable_tool_payload",
+      "name": "Palworld 可运行工具包",
+      "match": {
+        "any_file_patterns": "*.exe"
+      },
+      "source": {
+        "type": "package_root"
+      },
+      "target": {
+        "path": "Mod\\Palworld\\Runnable",
+        "type": "download_relative",
+        "usage_type": 2,
+        "mark_runnable": true
+      },
+      "priority": 610,
+      "description": "根目录包含顶层 exe 文件时，识别为可运行工具并安装到下载目录。"
+    },
+    {
+      "id": "pal_root_structure",
+      "name": "标准根目录结构",
+      "match": {
+        "root_has_dirs": [
+          "Pal"
+        ]
+      },
+      "source": {
+        "type": "package_root"
+      },
+      "target": {
+        "path": ".",
+        "type": "game_root"
+      },
+      "priority": 600,
+      "description": "具有完整游戏目录结构的模组优先级最高。"
+    },
+    {
+      "id": "pal_schema_submod_payload_raw",
+      "name": "PalSchema 数据扩展模组（raw）",
+      "match": {
+        "root_has_dirs": [
+          "raw"
+        ],
+        "root_has_files": [
+          "metadata.json"
+        ]
+      },
+      "source": {
+        "type": "package_root",
+        "preserve_candidate_dir": true
+      },
+      "target": {
+        "path": "Pal\\Binaries\\Win64\\ue4ss\\Mods\\PalSchema\\mods",
+        "type": "game_relative"
+      },
+      "priority": 595,
+      "description": "根目录命中 raw 目录时，识别为 PalSchema 数据扩展模组。",
+      "post_install": [
+        {
+          "path": "Pal\\Binaries\\Win64\\ue4ss\\Mods\\PalSchema\\mods",
+          "action": "ensure_dir_exists"
+        }
+      ]
+    },
+    {
+      "id": "pal_schema_submod_payload_blueprints",
+      "name": "PalSchema 数据扩展模组（blueprints）",
+      "match": {
+        "root_has_dirs": [
+          "blueprints"
+        ],
+        "root_has_files": [
+          "metadata.json"
+        ]
+      },
+      "source": {
+        "type": "package_root",
+        "preserve_candidate_dir": true
+      },
+      "target": {
+        "path": "Pal\\Binaries\\Win64\\ue4ss\\Mods\\PalSchema\\mods",
+        "type": "game_relative"
+      },
+      "priority": 594,
+      "description": "根目录命中 blueprints 目录时，识别为 PalSchema 数据扩展模组。",
+      "post_install": [
+        {
+          "path": "Pal\\Binaries\\Win64\\ue4ss\\Mods\\PalSchema\\mods",
+          "action": "ensure_dir_exists"
+        }
+      ]
+    },
+    {
+      "id": "pal_schema_submod_payload_pals",
+      "name": "PalSchema 数据扩展模组（pals）",
+      "match": {
+        "root_has_dirs": [
+          "pals"
+        ],
+        "root_has_files": [
+          "metadata.json"
+        ]
+      },
+      "source": {
+        "type": "package_root",
+        "preserve_candidate_dir": true
+      },
+      "target": {
+        "path": "Pal\\Binaries\\Win64\\ue4ss\\Mods\\PalSchema\\mods",
+        "type": "game_relative"
+      },
+      "priority": 593,
+      "description": "根目录命中 pals 目录时，识别为 PalSchema 数据扩展模组。",
+      "post_install": [
+        {
+          "path": "Pal\\Binaries\\Win64\\ue4ss\\Mods\\PalSchema\\mods",
+          "action": "ensure_dir_exists"
+        }
+      ]
+    },
+    {
+      "id": "pal_schema_submod_payload_translations",
+      "name": "PalSchema 数据扩展模组（translations）",
+      "match": {
+        "root_has_dirs": [
+          "translations"
+        ],
+        "root_has_files": [
+          "metadata.json"
+        ]
+      },
+      "source": {
+        "type": "package_root",
+        "preserve_candidate_dir": true
+      },
+      "target": {
+        "path": "Pal\\Binaries\\Win64\\ue4ss\\Mods\\PalSchema\\mods",
+        "type": "game_relative"
+      },
+      "priority": 592,
+      "description": "根目录命中 translations 目录时，识别为 PalSchema 数据扩展模组。",
+      "post_install": [
+        {
+          "path": "Pal\\Binaries\\Win64\\ue4ss\\Mods\\PalSchema\\mods",
+          "action": "ensure_dir_exists"
+        }
+      ]
+    },
+    {
+      "id": "pal_schema_submod_payload_items",
+      "name": "PalSchema 数据扩展模组（items）",
+      "match": {
+        "root_has_dirs": [
+          "items"
+        ],
+        "root_has_files": [
+          "metadata.json"
+        ]
+      },
+      "source": {
+        "type": "package_root",
+        "preserve_candidate_dir": true
+      },
+      "target": {
+        "path": "Pal\\Binaries\\Win64\\ue4ss\\Mods\\PalSchema\\mods",
+        "type": "game_relative"
+      },
+      "priority": 591,
+      "description": "根目录命中 items 目录时，识别为 PalSchema 数据扩展模组。",
+      "post_install": [
+        {
+          "path": "Pal\\Binaries\\Win64\\ue4ss\\Mods\\PalSchema\\mods",
+          "action": "ensure_dir_exists"
+        }
+      ]
+    },
+    {
+      "id": "ue4ss_lua_script_mod_upper",
+      "name": "UE4SS Lua脚本模组（Scripts/main.lua）",
+      "match": {
+        "any_file_patterns": "**/Scripts/main.lua"
+      },
+      "source": {
+        "type": "folder_containing",
+        "marker": "Scripts",
+        "selection": "all",
+        "marker_pattern": "**/Scripts/main.lua",
+        "ensure_files": [
+          {
+            "path": "enabled.txt",
+            "text": ""
+          }
+        ]
+      },
+      "target": {
+        "path": "Pal\\Binaries\\Win64\\ue4ss\\Mods",
+        "type": "game_relative"
+      },
+      "priority": 590,
+      "description": "根据 Scripts/main.lua 识别 UE4SS Lua 脚本模组。",
+      "post_install": [
+        {
+          "path": "Pal\\Binaries\\Win64\\ue4ss\\Mods",
+          "action": "ensure_dir_exists"
+        }
+      ]
+    },
+    {
+      "id": "ue4ss_lua_script_mod_lower",
+      "name": "UE4SS Lua脚本模组（scripts/main.lua）",
+      "match": {
+        "any_file_patterns": "**/scripts/main.lua"
+      },
+      "source": {
+        "type": "folder_containing",
+        "marker": "scripts",
+        "selection": "all",
+        "marker_pattern": "**/Scripts/main.lua",
+        "ensure_files": [
+          {
+            "path": "enabled.txt",
+            "text": ""
+          }
+        ]
+      },
+      "target": {
+        "path": "Pal\\Binaries\\Win64\\ue4ss\\Mods",
+        "type": "game_relative"
+      },
+      "priority": 589,
+      "description": "根据 scripts/main.lua 识别 UE4SS Lua 脚本模组。",
+      "post_install": [
+        {
+          "path": "Pal\\Binaries\\Win64\\ue4ss\\Mods",
+          "action": "ensure_dir_exists"
+        }
+      ]
+    },
+    {
+      "id": "ue4ss_dll_script_mod",
+      "name": "UE4SS DLL模组（dlls/main.dll）",
+      "match": {
+        "any_file_patterns": "**/dlls/main.dll"
+      },
+      "source": {
+        "type": "folder_containing",
+        "marker": "dlls",
+        "selection": "all",
+        "marker_pattern": "**/dlls/main.dll",
+        "ensure_files": [
+          {
+            "path": "enabled.txt",
+            "text": ""
+          }
+        ]
+      },
+      "target": {
+        "path": "Pal\\Binaries\\Win64\\ue4ss\\Mods",
+        "type": "game_relative"
+      },
+      "priority": 585,
+      "description": "根据 dlls/main.dll 识别 UE4SS DLL 文件夹模组。",
+      "post_install": [
+        {
+          "path": "Pal\\Binaries\\Win64\\ue4ss\\Mods",
+          "action": "ensure_dir_exists"
+        }
+      ]
+    },
+    {
+      "id": "ue4ss_enabled_fallback",
+      "name": "UE4SS 模组兜底（enabled.txt）",
+      "match": {
+        "any_file_patterns": "**/enabled.txt"
+      },
+      "source": {
+        "type": "folder_containing",
+        "marker": "enabled.txt",
+        "selection": "all"
+      },
+      "target": {
+        "path": "Pal\\Binaries\\Win64\\ue4ss\\Mods",
+        "type": "game_relative"
+      },
+      "priority": 580,
+      "description": "根据 enabled.txt 兜底识别 UE4SS 文件夹模组。",
+      "post_install": [
+        {
+          "path": "Pal\\Binaries\\Win64\\ue4ss\\Mods",
+          "action": "ensure_dir_exists"
+        }
+      ]
+    },
+    {
+      "id": "ue_config_ini_mod",
+      "name": "Unreal Engine 配置文件模组",
+      "match": {
+        "any_root_files": [
+          "Engine.ini",
+          "Game.ini",
+          "Input.ini",
+          "Scalability.ini",
+          "GameUserSettings.ini"
+        ],
+        "none_file_extensions": [
+          ".exe",
+          ".dll",
+          ".pak",
+          ".ucas",
+          ".utoc"
+        ]
+      },
+      "source": {
+        "type": "package_root",
+        "unwrap_single_root": true
+      },
+      "target": {
+        "path": "Pal\\Saved\\Config\\Windows",
+        "type": "user_relative",
+        "base_type": "local_appdata"
+      },
+      "priority": 520,
+      "description": "识别 Unreal Engine 配置文件类模组并安装到用户配置目录。"
+    },
+    {
+      "id": "logicmods_folder_payload",
+      "name": "LogicMods 文件夹模组",
+      "match": {
+        "root_has_dirs": [
+          "LogicMods"
+        ]
+      },
+      "source": {
+        "type": "package_root"
+      },
+      "target": {
+        "path": "Pal\\Content\\Paks",
+        "type": "game_relative"
+      },
+      "priority": 519,
+      "description": "根目录包含 LogicMods 文件夹时，保留该文件夹并安装到 Content\\Paks。",
+      "post_install": [
+        {
+          "path": "Pal\\Content\\Paks",
+          "action": "ensure_dir_exists"
+        }
+      ]
+    },
+    {
+      "id": "pak_mod_auto",
+      "name": "基础Pak模组",
+      "match": {
+        "any_file_extensions": [
+          ".pak"
+        ]
+      },
+      "source": {
+        "type": "file_by_extension",
+        "extension": ".pak"
+      },
+      "target": {
+        "path": "Pal\\Content\\Paks\\~mods",
+        "type": "game_relative"
+      },
+      "priority": 500,
+      "description": "通用的 .pak 文件检测，作为 fallback 方案。",
+      "post_install": [
+        {
+          "path": "Pal\\Content\\Paks\\~mods",
+          "action": "ensure_dir_exists"
+        }
+      ]
+    },
+    {
+      "id": "__auto_root_dir_match__",
+      "name": "内置-根路径匹配",
+      "builtin": true,
+      "generated_by": "auto_root_dir_match",
+      "priority": 595,
+      "match": {
+        "root_has_dirs": [
+          "Pal"
+        ]
+      },
+      "source": {
+        "type": "package_root"
+      },
+      "target": {
+        "type": "game_root",
+        "path": "."
+      }
+    }
+  ],
+  "schema_version": 5
+}

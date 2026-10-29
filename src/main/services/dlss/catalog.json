@@ -1,0 +1,429 @@
+[
+  {
+    "id": "reshade",
+    "name": "ReShade 加载层",
+    "version": "6.8.0.2155",
+    "upstream": "https://reshade.me/",
+    "distribution": "从 ReShade 官方 6.8.0 Addon 安装包按 SHA-256 校验后提取 DLL，不执行安装器。",
+    "files": [
+      {
+        "source": "reshade-vulkan/ReShade64.dll",
+        "target": "ReShade64.dll",
+        "size": 5592064,
+        "sha256": "0cee63f9c9f13f3ac909c5b4903f4dbb4b719a7ab3b4f13b0deaf83c814b94f7",
+        "downloadEntry": "ReShade64.dll",
+        "download": 0
+      }
+    ],
+    "downloads": [
+      {
+        "url": "https://reshade.me/downloads/ReShade_Setup_6.8.0_Addon.exe",
+        "sha256": "afe4c8f13048306307983b8b3d41d5bf00a86820440b0e57dea10950e1176445",
+        "format": "sfx",
+        "size": 4318424
+      }
+    ]
+  },
+  {
+    "id": "sr",
+    "name": "DLSS 超分辨率运行库",
+    "version": "310.8.0.0",
+    "upstream": "https://github.com/NVIDIA/DLSS",
+    "distribution": "NVIDIA 超分运行库 310.8.0，经 RHI 固定版本分发并按发布包及文件双重校验。",
+    "files": [
+      {
+        "source": "streamline/nvngx_dlss.dll",
+        "target": "nvngx_dlss.dll",
+        "size": 58956400,
+        "sha256": "c85f971ce023c9f3492fc7455f0b01a24ba18ea39636407a846902c4360b0b7e",
+        "downloadEntry": "nvngx_dlss.dll",
+        "download": 0
+      }
+    ],
+    "downloads": [
+      {
+        "url": "https://github.com/RankFTW/rhi-repo/releases/download/dlss-310.8.0/nvngx_dlss_310.8.0.zip",
+        "sha256": "fb481660f7e952b87f91760e3afd7f9dc14cd2c3361b470e948d6346e4323009",
+        "format": "zip",
+        "size": 30265760
+      }
+    ]
+  },
+  {
+    "id": "nr",
+    "name": "RenoDX 神经渲染",
+    "version": "4.70 (0.2026.0828.0517)",
+    "upstream": "https://github.com/clshortfuse/renodx",
+    "distribution": "RenoDX DLSS5 v4.70，已对照 RHI 发布包与 DLSS5-Swapper v2.2.7 的指纹一致。",
+    "files": [
+      {
+        "source": "renodx-dlss5.addon64",
+        "target": "renodx-dlss5.addon64",
+        "size": 1732608,
+        "sha256": "d5adf82eb44b065f4c590ac91fe824bab07afea0eb9f994bde936710c8593952",
+        "downloadEntry": "renodx-dlss5.addon64",
+        "download": 0
+      }
+    ],
+    "runtimeSource": "https://github.com/RankFTW/rhi-repo/releases/tag/dlssnr-310.8.0",
+    "downloads": [
+      {
+        "url": "https://github.com/RankFTW/rhi-repo/releases/download/renodx-dlss5-4.70/renodx-dlss5_4.70.zip",
+        "sha256": "d6e356d01b429af6288f488a4926c44f1d779a7d4586ee8c79d04d3a09a536e6",
+        "format": "zip",
+        "size": 632174
+      }
+    ]
+  },
+  {
+    "id": "nr-runtime",
+    "name": "NVIDIA 原版神经渲染运行库",
+    "version": "310.8.0.0",
+    "upstream": "https://github.com/RankFTW/rhi-repo/releases/tag/dlssnr-310.8.0",
+    "distribution": "NVIDIA 有效签名原版，按已核验指纹管理；RTX 50 实验路线。",
+    "downloads": [
+      {
+        "url": "https://github.com/RankFTW/rhi-repo/releases/download/dlssnr-310.8.0/nvngx_dlssnr_310.8.0.zip",
+        "sha256": "388c0a7912e15ec911b9c9e11a692142b11fe387ddf2b637d8c358138fffb3ac",
+        "format": "zip",
+        "size": 109425288
+      }
+    ],
+    "files": [
+      {
+        "source": "streamline/nvngx_dlssnr.dll",
+        "target": "nvngx_dlssnr.dll",
+        "size": 165840496,
+        "sha256": "e16bcf15e16e13f527491cdf7845b2fe6521a738d8f7c9c721866a8496e1fc8e",
+        "downloadEntry": "nvngx_dlssnr.dll",
+        "download": 0
+      }
+    ]
+  },
+  {
+    "id": "nr-community",
+    "name": "ShortFuse 社区适配运行库",
+    "version": "310.8.SF-v2",
+    "upstream": "https://github.com/RankFTW/rhi-repo/releases/tag/dlssnr-310.8.SF-v2",
+    "distribution": "来源明确的 ShortFuse 修改版，用于 RTX 20/30/40/50 实验路线，不表示 NVIDIA 官方兼容性保证。修改版的签名差异与下载损坏分别判断。",
+    "downloads": [
+      {
+        "url": "https://github.com/RankFTW/rhi-repo/releases/download/dlssnr-310.8.SF-v2/nvngx_dlssnr_310.8.SF-v2.zip",
+        "sha256": "1da35941894994eb087e017577829e492454e9bae3a6a9397027069ceb74955c",
+        "format": "zip",
+        "size": 116693212
+      }
+    ],
+    "files": [
+      {
+        "source": "streamline/nvngx_dlssnr.dll",
+        "target": "nvngx_dlssnr.dll",
+        "size": 165830144,
+        "sha256": "6eb209e764f39872625debd6abaf45e2bb6322f6f270f781f70c059ae30b3927",
+        "downloadEntry": "nvngx_dlssnr.dll",
+        "download": 0
+      }
+    ]
+  },
+  {
+    "id": "feeder",
+    "name": "DLSS5-Feeder",
+    "version": "0.15.1",
+    "upstream": "https://github.com/jlrouzies-fr/DLSS5-Feeder/releases/tag/v0.15.1",
+    "distribution": "核心与着色器分别从作者固定发布版本获取，发布包与文件均校验 SHA-256，并保留随附许可证。",
+    "files": [
+      {
+        "source": "feeder/dlss5-feed.addon64",
+        "target": "dlss5-feed.addon64",
+        "size": 297472,
+        "sha256": "3afc8efb5f516e94a2a068b2e90eaed360d1e30ca2c29b623e0cfadc1f05d50d",
+        "downloadEntry": "dlss5-feed.addon64",
+        "download": 0
+      },
+      {
+        "source": "feeder/layer-x64/VkLayer_feed_vk.dll",
+        "target": "VkLayer_feed_vk.dll",
+        "size": 18944,
+        "sha256": "a789badd4bb43eb26d694d347d8b17cc57c36006154fbb677c08e5e9c713984e",
+        "downloadEntry": "layer-x64/VkLayer_feed_vk.dll",
+        "download": 0
+      },
+      {
+        "source": "feeder/reshade-shaders/Shaders/DLSS5_Feed.fx",
+        "target": "reshade-shaders/Shaders/DLSS5_Feed.fx",
+        "size": 51193,
+        "sha256": "cdac08a721b14b97187dd86c5b5bead157c9063d7ee859a0f131a8ee791695f1",
+        "downloadEntry": "reshade-shaders/Shaders/DLSS5_Feed.fx",
+        "download": 0
+      },
+      {
+        "source": "feeder/licenses/VORT-LICENSE.txt",
+        "target": "licenses/VORT-LICENSE.txt",
+        "size": 1068,
+        "sha256": "800bacb0f9db4df8203f0dad1f99947109a44f4097380807e0483bd62dee0d41",
+        "downloadEntry": "vort_Shaders-b410b9f0c0fbb83c8cb42164aaf1655fab386f4a/LICENSE",
+        "download": 1
+      },
+      {
+        "source": "feeder/reshade-shaders/Shaders/Includes/vort_ACES.fxh",
+        "target": "reshade-shaders/Shaders/Includes/vort_ACES.fxh",
+        "size": 36642,
+        "sha256": "967cb4914457f18cc91e8844e6f7ccef0b353e4091e38f9c8667d36d45309b61",
+        "downloadEntry": "vort_Shaders-b410b9f0c0fbb83c8cb42164aaf1655fab386f4a/Shaders/Includes/vort_ACES.fxh",
+        "download": 1
+      },
+      {
+        "source": "feeder/reshade-shaders/Shaders/Includes/vort_Bloom.fxh",
+        "target": "reshade-shaders/Shaders/Includes/vort_Bloom.fxh",
+        "size": 8242,
+        "sha256": "a3ab7942b73c61dcabe9b83ae42dafe65956c7a60d627aea27ede48a7cfb3c04",
+        "downloadEntry": "vort_Shaders-b410b9f0c0fbb83c8cb42164aaf1655fab386f4a/Shaders/Includes/vort_Bloom.fxh",
+        "download": 1
+      },
+      {
+        "source": "feeder/reshade-shaders/Shaders/Includes/vort_BlueNoise.fxh",
+        "target": "reshade-shaders/Shaders/Includes/vort_BlueNoise.fxh",
+        "size": 354,
+        "sha256": "a1eca01ddc6bdfef2b0c52601d297c59d7dabd71039d1489b7092532407cb455",
+        "downloadEntry": "vort_Shaders-b410b9f0c0fbb83c8cb42164aaf1655fab386f4a/Shaders/Includes/vort_BlueNoise.fxh",
+        "download": 1
+      },
+      {
+        "source": "feeder/reshade-shaders/Shaders/Includes/vort_ColorChanges.fxh",
+        "target": "reshade-shaders/Shaders/Includes/vort_ColorChanges.fxh",
+        "size": 12499,
+        "sha256": "0cbd91dff9aa5ab615a206f56ba760378810a5540d4f2928e35138c7980b1538",
+        "downloadEntry": "vort_Shaders-b410b9f0c0fbb83c8cb42164aaf1655fab386f4a/Shaders/Includes/vort_ColorChanges.fxh",
+        "download": 1
+      },
+      {
+        "source": "feeder/reshade-shaders/Shaders/Includes/vort_ColorTex.fxh",
+        "target": "reshade-shaders/Shaders/Includes/vort_ColorTex.fxh",
+        "size": 497,
+        "sha256": "f5eef2db313c73b0419503295731c03bc4365fe1ed219f4afa618707b59e8d6c",
+        "downloadEntry": "vort_Shaders-b410b9f0c0fbb83c8cb42164aaf1655fab386f4a/Shaders/Includes/vort_ColorTex.fxh",
+        "download": 1
+      },
+      {
+        "source": "feeder/reshade-shaders/Shaders/Includes/vort_Defs.fxh",
+        "target": "reshade-shaders/Shaders/Includes/vort_Defs.fxh",
+        "size": 23415,
+        "sha256": "a00e99ece8b07899a7918a5248a2d603fd7f98882c795e3d31b9470cfe70a61c",
+        "downloadEntry": "vort_Shaders-b410b9f0c0fbb83c8cb42164aaf1655fab386f4a/Shaders/Includes/vort_Defs.fxh",
+        "download": 1
+      },
+      {
+        "source": "feeder/reshade-shaders/Shaders/Includes/vort_Depth.fxh",
+        "target": "reshade-shaders/Shaders/Includes/vort_Depth.fxh",
+        "size": 1892,
+        "sha256": "92d4f0a93b3945452c861e580117bb875bb594157694b3c8741790eaf3826205",
+        "downloadEntry": "vort_Shaders-b410b9f0c0fbb83c8cb42164aaf1655fab386f4a/Shaders/Includes/vort_Depth.fxh",
+        "download": 1
+      },
+      {
+        "source": "feeder/reshade-shaders/Shaders/Includes/vort_Filters.fxh",
+        "target": "reshade-shaders/Shaders/Includes/vort_Filters.fxh",
+        "size": 4848,
+        "sha256": "8d98a78f2fd7fe91f34bf4044d81094bd40fbb2c7b8f520ef66c5043f720f98d",
+        "downloadEntry": "vort_Shaders-b410b9f0c0fbb83c8cb42164aaf1655fab386f4a/Shaders/Includes/vort_Filters.fxh",
+        "download": 1
+      },
+      {
+        "source": "feeder/reshade-shaders/Shaders/Includes/vort_HDRTex.fxh",
+        "target": "reshade-shaders/Shaders/Includes/vort_HDRTex.fxh",
+        "size": 166,
+        "sha256": "5d3d002a6d4d0fc6e67dcdd4a68497163268fbb590c7477220dac8f1293f916e",
+        "downloadEntry": "vort_Shaders-b410b9f0c0fbb83c8cb42164aaf1655fab386f4a/Shaders/Includes/vort_HDRTex.fxh",
+        "download": 1
+      },
+      {
+        "source": "feeder/reshade-shaders/Shaders/Includes/vort_MotionBlur.fxh",
+        "target": "reshade-shaders/Shaders/Includes/vort_MotionBlur.fxh",
+        "size": 19846,
+        "sha256": "67edbc5db1645d3c10c08375eb0bec0911c59c4fc1d3dde2d3e9c46a292ea35b",
+        "downloadEntry": "vort_Shaders-b410b9f0c0fbb83c8cb42164aaf1655fab386f4a/Shaders/Includes/vort_MotionBlur.fxh",
+        "download": 1
+      },
+      {
+        "source": "feeder/reshade-shaders/Shaders/Includes/vort_MotionBlur_Cheap.fxh",
+        "target": "reshade-shaders/Shaders/Includes/vort_MotionBlur_Cheap.fxh",
+        "size": 13122,
+        "sha256": "0837c8151a50ef57c77bab7a3b14dd4c3b92354e4021ee37f54eb47f3f5589c7",
+        "downloadEntry": "vort_Shaders-b410b9f0c0fbb83c8cb42164aaf1655fab386f4a/Shaders/Includes/vort_MotionBlur_Cheap.fxh",
+        "download": 1
+      },
+      {
+        "source": "feeder/reshade-shaders/Shaders/Includes/vort_MotionUtils.fxh",
+        "target": "reshade-shaders/Shaders/Includes/vort_MotionUtils.fxh",
+        "size": 5765,
+        "sha256": "2d353b23cea6961ca40308a6aebf1e56d509485a728399d5f6b36427b7023027",
+        "downloadEntry": "vort_Shaders-b410b9f0c0fbb83c8cb42164aaf1655fab386f4a/Shaders/Includes/vort_MotionUtils.fxh",
+        "download": 1
+      },
+      {
+        "source": "feeder/reshade-shaders/Shaders/Includes/vort_MotionVectors.fxh",
+        "target": "reshade-shaders/Shaders/Includes/vort_MotionVectors.fxh",
+        "size": 17148,
+        "sha256": "22d5c8f8a5f2cccee0ddde994ba04a7bc5379c54b1b3e9c7cf7d46f1f8ead87d",
+        "downloadEntry": "vort_Shaders-b410b9f0c0fbb83c8cb42164aaf1655fab386f4a/Shaders/Includes/vort_MotionVectors.fxh",
+        "download": 1
+      },
+      {
+        "source": "feeder/reshade-shaders/Shaders/Includes/vort_Motion_UI.fxh",
+        "target": "reshade-shaders/Shaders/Includes/vort_Motion_UI.fxh",
+        "size": 4934,
+        "sha256": "29783705b01d7b83a408d29a9d4b72c5a90012a91fb05ebdf1166ba9e9aeac2b",
+        "downloadEntry": "vort_Shaders-b410b9f0c0fbb83c8cb42164aaf1655fab386f4a/Shaders/Includes/vort_Motion_UI.fxh",
+        "download": 1
+      },
+      {
+        "source": "feeder/reshade-shaders/Shaders/Includes/vort_OKColors.fxh",
+        "target": "reshade-shaders/Shaders/Includes/vort_OKColors.fxh",
+        "size": 16191,
+        "sha256": "5a0a8468e97eaa9e8e018246e12002a86e3fb0c7a9cb97a3bc38390fc3f854e2",
+        "downloadEntry": "vort_Shaders-b410b9f0c0fbb83c8cb42164aaf1655fab386f4a/Shaders/Includes/vort_OKColors.fxh",
+        "download": 1
+      },
+      {
+        "source": "feeder/reshade-shaders/Shaders/Includes/vort_Static_UI.fxh",
+        "target": "reshade-shaders/Shaders/Includes/vort_Static_UI.fxh",
+        "size": 8274,
+        "sha256": "ccd75ef28359b5324cf479fe568fbad7586ac203f6b1921f1b6fae48ae19bef2",
+        "downloadEntry": "vort_Shaders-b410b9f0c0fbb83c8cb42164aaf1655fab386f4a/Shaders/Includes/vort_Static_UI.fxh",
+        "download": 1
+      },
+      {
+        "source": "feeder/reshade-shaders/Shaders/Includes/vort_TAA.fxh",
+        "target": "reshade-shaders/Shaders/Includes/vort_TAA.fxh",
+        "size": 5837,
+        "sha256": "9b5c701fdacb37f15e565ca1aa3a861e4df3f55db493cd6589d509927ed08ede",
+        "downloadEntry": "vort_Shaders-b410b9f0c0fbb83c8cb42164aaf1655fab386f4a/Shaders/Includes/vort_TAA.fxh",
+        "download": 1
+      },
+      {
+        "source": "feeder/reshade-shaders/Shaders/Includes/vort_Tonemap.fxh",
+        "target": "reshade-shaders/Shaders/Includes/vort_Tonemap.fxh",
+        "size": 2903,
+        "sha256": "9413eef6190303e920356310bc3aa2a270c052a1bcfde44f024f0a8986095f30",
+        "downloadEntry": "vort_Shaders-b410b9f0c0fbb83c8cb42164aaf1655fab386f4a/Shaders/Includes/vort_Tonemap.fxh",
+        "download": 1
+      },
+      {
+        "source": "feeder/reshade-shaders/Shaders/vort_Motion.fx",
+        "target": "reshade-shaders/Shaders/vort_Motion.fx",
+        "size": 2359,
+        "sha256": "71ef3086ccf86792f5a333346eebb7b857434583712d3a51b9998db99e562edc",
+        "downloadEntry": "vort_Shaders-b410b9f0c0fbb83c8cb42164aaf1655fab386f4a/Shaders/vort_Motion.fx",
+        "download": 1
+      },
+      {
+        "source": "feeder/reshade-shaders/Textures/vort_BlueNoise.png",
+        "target": "reshade-shaders/Textures/vort_BlueNoise.png",
+        "size": 262548,
+        "sha256": "050d26db9283fbaece3b6883e300d22403631d83a12a5f2f79dc8b789b860305",
+        "downloadEntry": "vort_Shaders-b410b9f0c0fbb83c8cb42164aaf1655fab386f4a/Textures/vort_BlueNoise.png",
+        "download": 1
+      },
+      {
+        "source": "feeder/reshade-shaders/Textures/vort_MLUT.png",
+        "target": "reshade-shaders/Textures/vort_MLUT.png",
+        "size": 3892952,
+        "sha256": "acb25ed926e7e847aeb0ef521745287d4ddda3c7f22e472ee42d61bb3064bbd7",
+        "downloadEntry": "vort_Shaders-b410b9f0c0fbb83c8cb42164aaf1655fab386f4a/Textures/vort_MLUT.png",
+        "download": 1
+      },
+      {
+        "source": "feeder/reshade-shaders/Shaders/ReShade.fxh",
+        "target": "reshade-shaders/Shaders/ReShade.fxh",
+        "size": 4250,
+        "sha256": "6dabfbbaf968c3871905d2ea17f96572ff7b1cec01310b5d0e5252b66b30174f",
+        "downloadEntry": "file",
+        "download": 2
+      },
+      {
+        "source": "feeder/reshade-shaders/Shaders/ReShadeUI.fxh",
+        "target": "reshade-shaders/Shaders/ReShadeUI.fxh",
+        "size": 9930,
+        "sha256": "78adf672df47460297eb9fe6dd238d2aafa24510b52b84feb1a745dff70eb901",
+        "downloadEntry": "file",
+        "download": 3
+      },
+      {
+        "source": "feeder/licenses/DLSS5-Feeder-LICENSE.txt",
+        "target": "licenses/DLSS5-Feeder-LICENSE.txt",
+        "size": 1187,
+        "sha256": "6562d5a5e3d7534711e34f4b34335f23f067acc839ae5274c1250bf5f4654b8b",
+        "downloadEntry": "file",
+        "download": 4
+      }
+    ],
+    "downloads": [
+      {
+        "url": "https://github.com/jlrouzies-fr/DLSS5-Feeder/releases/download/v0.15.1/DLSS5-Feeder-0.15.1.zip",
+        "sha256": "2e44e81e691e75e532b9b7babc278a12615cb7f0fd9ef854da50e6ef17b272f4",
+        "format": "zip",
+        "size": 358284
+      },
+      {
+        "url": "https://codeload.github.com/vortigern11/vort_Shaders/zip/b410b9f0c0fbb83c8cb42164aaf1655fab386f4a",
+        "sha256": "231ba34a75556f9943e359559a89b0d0cc2caa322d9dcdee5630061bf9fe13b6",
+        "format": "zip",
+        "size": 4211561
+      },
+      {
+        "url": "https://raw.githubusercontent.com/crosire/reshade-shaders/ee30868391d4ad103db60489820102d8fd40e3c1/Shaders/ReShade.fxh",
+        "sha256": "6dabfbbaf968c3871905d2ea17f96572ff7b1cec01310b5d0e5252b66b30174f",
+        "format": "file",
+        "size": 4250
+      },
+      {
+        "url": "https://raw.githubusercontent.com/crosire/reshade-shaders/ee30868391d4ad103db60489820102d8fd40e3c1/Shaders/ReShadeUI.fxh",
+        "sha256": "78adf672df47460297eb9fe6dd238d2aafa24510b52b84feb1a745dff70eb901",
+        "format": "file",
+        "size": 9930
+      },
+      {
+        "url": "https://raw.githubusercontent.com/jlrouzies-fr/DLSS5-Feeder/v0.7.0/LICENSE",
+        "sha256": "6562d5a5e3d7534711e34f4b34335f23f067acc839ae5274c1250bf5f4654b8b",
+        "format": "file",
+        "size": 1187
+      }
+    ]
+  },
+  {
+    "id": "mfg40",
+    "name": "RTX 40 多帧生成",
+    "version": "0.2026.0830.2047",
+    "upstream": "https://github.com/ShyVortex/dlss-unlocked",
+    "distribution": "参考 addon 的精确上游构建未证实；只允许缓存准备，未开放隔离启动。",
+    "files": [
+      {
+        "source": "renodx-mfgunlock.addon64",
+        "target": "renodx-mfgunlock.addon64",
+        "sha256": "ca195d0fd97b920068b380bd411497600e878f8b357eea6be8cc320d995feea9",
+        "size": 316416
+      }
+    ]
+  },
+  {
+    "id": "sm86",
+    "name": "RTX 20/30 dlssg_for_sm86",
+    "version": "reference-sha256-3d4c7d53",
+    "upstream": "https://github.com/sdli1995/dlssg_for_sm86",
+    "distribution": "参考文件没有版本资源；版本以哈希记录。GPLv3 源码不涵盖内嵌 NVIDIA 材料授权。代理加载不满足隔离语义。",
+    "files": [
+      {
+        "source": "dlssg_sm86/version.dll",
+        "target": "version.dll",
+        "sha256": "3d4c7d537a6e71e3a9d41ffc6487e054b26c56d27b7c0825d39eaa7ef0c7e86d",
+        "size": 29676832
+      },
+      {
+        "source": "dlssg_sm86/dlssg_sm86.ini",
+        "target": "dlssg_sm86.ini",
+        "sha256": "33553c94a772feaf09de8e63f9bb868cc4fe91f9bdfcb2403e5008cb52e7cb78",
+        "size": 2768
+      }
+    ]
+  }
+]

@@ -1,0 +1,228 @@
+// 工具页（游戏工具 / 系统工具）各模块共用的版式类，只使用 vertex-ui token。
+// 由 component/tool-page/index.js 全局引入一次。
+
+// 模块根节点：放在外壳滚动区里，不随容器压缩（否则内容会溢出根节点，覆盖层等定位会错位）。
+.tool-section {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+  gap: var(--space-5);
+  min-width: 0;
+  color: var(--color-text);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+}
+
+.tool-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-6);
+}
+
+.tool-toolbar__tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.tool-section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+  min-height: 22px;
+}
+
+.tool-section-title {
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-base);
+
+  small {
+    margin-left: 6px;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.tool-section-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 12.5px;
+}
+
+// 封面网格：列数 = floor((宽 + 间距) / (最小卡宽 + 间距))，并限制最多列数。
+.tool-cover-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(max(210px, calc((100% - 5 * 22px) / 6)), 1fr));
+  gap: 28px 22px;
+
+  &.is-portrait {
+    grid-template-columns: repeat(auto-fill, minmax(max(150px, calc((100% - 7 * 18px) / 8)), 1fr));
+    gap: var(--space-6) 18px;
+  }
+}
+
+.tool-card-panel {
+  min-width: 0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+}
+
+.tool-skeleton {
+  display: block;
+  background: var(--color-surface-strong);
+  border-radius: var(--radius-sm);
+}
+
+.tool-skeleton-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .tool-skeleton.is-cover {
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+  }
+
+  &.is-portrait .tool-skeleton.is-cover {
+    aspect-ratio: 2 / 3;
+  }
+
+  .tool-skeleton.is-line {
+    height: 12px;
+    width: 72%;
+  }
+
+  .tool-skeleton.is-short {
+    height: 10px;
+    width: 46%;
+  }
+}
+
+.tool-status {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 6px;
+  height: 22px;
+  padding: 0 9px;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+  background: var(--color-surface-hover);
+  border-radius: var(--radius-pill);
+
+  &::before {
+    width: 6px;
+    height: 6px;
+    background: var(--color-text-subtle);
+    border-radius: 50%;
+    content: '';
+  }
+
+  &.is-success {
+    color: var(--color-success-strong);
+    background: var(--color-success-soft);
+
+    &::before {
+      background: var(--color-success);
+    }
+  }
+
+  &.is-progress {
+    color: var(--color-accent-strong);
+    background: color-mix(in srgb, var(--color-accent-soft) 55%, var(--color-white));
+
+    &::before {
+      background: var(--color-accent);
+    }
+  }
+
+  &.is-warning {
+    color: color-mix(in srgb, var(--color-warning) 50%, var(--color-black));
+    background: color-mix(in srgb, var(--color-warning-soft) 45%, var(--color-white));
+
+    &::before {
+      background: var(--color-warning);
+    }
+  }
+
+  &.is-danger {
+    color: var(--color-danger-strong);
+    background: var(--color-danger-soft);
+
+    &::before {
+      background: var(--color-danger);
+    }
+  }
+}
+
+.tool-tag {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  height: 20px;
+  padding: 0 7px;
+  color: var(--color-text-secondary);
+  font-size: 11.5px;
+  font-weight: var(--font-weight-semibold);
+  white-space: nowrap;
+  background: var(--color-surface-hover);
+  border-radius: var(--radius-sm);
+
+  &.is-accent {
+    color: var(--color-accent-strong);
+    background: var(--color-accent-soft);
+  }
+}
+
+.tool-mono {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+}
+
+.tool-inline-spinner {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 12px;
+  height: 12px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: tool-inline-spin 700ms linear infinite;
+}
+
+@keyframes tool-inline-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.tool-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tool-inline-spinner {
+    animation-duration: 2s;
+  }
+}

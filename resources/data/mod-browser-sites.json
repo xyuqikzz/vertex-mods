@@ -1,0 +1,30 @@
+[
+  {
+    "id": "nexus",
+    "name": "Nexus Mods",
+    "url": "https://www.nexusmods.com",
+    "description": "全球最大的模组社区",
+    "enabled": true
+  },
+  {
+    "id": "modio",
+    "name": "Mod.io",
+    "url": "https://mod.io",
+    "description": "跨平台模组托管平台",
+    "enabled": true
+  },
+  {
+    "id": "ficsit",
+    "name": "Ficsit",
+    "url": "https://ficsit.app",
+    "description": "Satisfactory 模组社区",
+    "enabled": true
+  },
+  {
+    "id": "thunderstore",
+    "name": "Thunderstore",
+    "url": "https://thunderstore.io",
+    "description": "BepInEx 模组社区",
+    "enabled": true
+  }
+]

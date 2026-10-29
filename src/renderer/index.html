@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https: http:; media-src 'self' blob: https: http:; connect-src 'self' https: http: ws: wss:; worker-src 'self' blob:; frame-src https: http:; object-src 'none'; base-uri 'self'; form-action 'none'" />
+    <title></title>
+  </head>
+  <style>
+    html,
+    body,
+    #app {
+      overflow: hidden;
+      -webkit-user-select: none;
+    }
+  </style>
+
+  <body style="padding: 0; margin: 0; background: transparent">
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

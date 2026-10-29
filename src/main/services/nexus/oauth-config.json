@@ -1,0 +1,6 @@
+{
+  "clientId": "vortex_loopback",
+  "redirectUri": "http://127.0.0.1:0",
+  "scope": "openid profile email",
+  "embeddedAuthorizationAllowed": false
+}

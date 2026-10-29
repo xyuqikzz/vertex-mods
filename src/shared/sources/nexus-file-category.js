@@ -1,0 +1,9 @@
+export const NEXUS_MOD_FILE_CATEGORY_ID = Object.freeze({
+  MAIN: 1,
+  UPDATE: 2,
+  OPTIONAL: 3,
+  OLD_VERSION: 4,
+  MISCELLANEOUS: 5,
+  DELETED: 6,
+  ARCHIVED: 7
+})

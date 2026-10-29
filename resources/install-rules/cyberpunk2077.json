@@ -1,0 +1,25 @@
+{
+  "schema_version": 5,
+  "requires": { "capabilities": ["units.v1"] },
+  "install_rules": [{
+    "id": "redscript-distribution",
+    "match": { "any_file_patterns": ["**/engine/tools/scc.exe"] },
+    "declarative": {
+      "units": [{
+        "id": "redscript",
+        "role": "loader",
+        "selector": { "anchor": "**/engine/tools/scc.exe", "parent": 2, "max": 1, "companions": ["engine/tools/scc_lib.dll", "engine/config/base/scripts.ini"], "include": ["engine/**", "r6/**"] },
+        "target": { "base": "game", "path": "." }
+      }]
+    }
+  }, {
+    "id": "cyberpunk-content",
+    "declarative": {
+      "units": [
+        { "id": "archives", "role": "resource", "selector": { "anchor": "**/*.archive", "include": ["*.archive", "*.archive.xl"], "min": 0 }, "target": { "base": "game", "path": "archive/pc/mod" } },
+        { "id": "scripts", "role": "script", "selector": { "anchor": "**/r6/scripts", "kind": "directory", "max": 1, "min": 0 }, "target": { "base": "game", "path": "r6/scripts" } },
+        { "id": "plugins", "role": "plugin", "selector": { "anchor": "**/bin/x64/plugins", "kind": "directory", "max": 1, "min": 0 }, "target": { "base": "game", "path": "bin/x64/plugins" } }
+      ]
+    }
+  }]
+}

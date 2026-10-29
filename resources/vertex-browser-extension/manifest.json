@@ -1,0 +1,37 @@
+{
+  "manifest_version": 3,
+  "name": "Vertex Mod Installer",
+  "version": "1.0.0",
+  "description": "在 Nexus Mods、Mod.io、Thunderstore 等模组网站上一键安装模组到 Vertex",
+  "permissions": [],
+  "icons": {
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["icon48.png"],
+      "matches": [
+        "*://*.nexusmods.com/*",
+        "*://*.mod.io/*",
+        "*://*.curseforge.com/*",
+        "*://*.thunderstore.io/*",
+        "*://ficsit.app/*"
+      ]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.nexusmods.com/*",
+        "*://*.mod.io/*",
+        "*://*.curseforge.com/*",
+        "*://*.thunderstore.io/*",
+        "*://ficsit.app/*"
+      ],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}

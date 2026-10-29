@@ -1,0 +1,109 @@
+// 输入、文本域与选择框共享字段节奏，业务布局仍可覆盖各组件原有 class。
+.vx-field,
+.vx-select-field {
+  display: grid;
+  align-content: start;
+  min-width: 0;
+  gap: var(--space-1);
+  color: var(--color-text-secondary);
+  font: var(--font-weight-regular) var(--font-size-sm) / var(--line-height-base)
+    var(--font-family-base);
+}
+
+.vx-field__label,
+.vx-select-field__label {
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+  overflow-wrap: anywhere;
+}
+
+.vx-field__message,
+.vx-select-field__message {
+  min-height: 1.5em;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+  overflow-wrap: anywhere;
+}
+
+.vx-input,
+.vx-textarea,
+.vx-select {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: var(--control-height-md);
+  padding: 0 var(--control-padding-x);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--control-bg);
+  color: var(--color-text);
+  font: var(--font-weight-regular) var(--font-size-md) / var(--line-height-base)
+    var(--font-family-base);
+  transition:
+    background var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard);
+
+  &::placeholder {
+    color: var(--color-placeholder);
+    opacity: 1;
+  }
+  &:disabled {
+    cursor: not-allowed;
+    background: var(--control-bg-disabled);
+    color: var(--control-text-disabled);
+    box-shadow: none;
+    opacity: 1;
+  }
+}
+
+.vx-textarea {
+  min-height: 92px;
+  padding: var(--space-2) var(--control-padding-x);
+  resize: vertical;
+}
+
+:is(.vx-field, .vx-select-field):not(.is-readonly):not(.has-error)
+  :is(.vx-input, .vx-textarea, .vx-select):hover:not(:disabled) {
+  background: var(--control-bg-hover);
+  border-color: var(--color-border-strong);
+}
+
+:is(.vx-field, .vx-select-field).is-readonly
+  :is(.vx-input, .vx-textarea, .vx-select):not(:disabled) {
+  background: var(--color-surface-soft);
+  cursor: default;
+}
+
+:is(.vx-field, .vx-select-field).has-error {
+  :is(.vx-input, .vx-textarea, .vx-select) {
+    border-color: var(--color-danger);
+  }
+  :is(.vx-field__message, .vx-select-field__message) {
+    color: var(--color-danger);
+  }
+}
+
+// 错误边框保留语义，外圈独立标识键盘焦点，避免错误态丢失焦点反馈。
+.vx-input:focus,
+.vx-textarea:focus,
+.vx-select:focus-visible {
+  outline: 2px solid var(--color-accent-active);
+  outline-offset: 2px;
+  box-shadow: var(--focus-ring);
+}
+
+@keyframes vx-control-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root
+    :is(.vx-button, .vx-field, .vx-select)
+    :is(.vx-button__spinner, .vx-input__spinner, .vx-select__spinner) {
+    animation: none;
+  }
+}

@@ -1,0 +1,453 @@
+@use './fields';
+
+:root {
+  --font-family-base: 'Microsoft YaHei UI', 'Segoe UI', system-ui, sans-serif;
+  --font-family-mono: 'JetBrains Mono', 'Cascadia Code', monospace;
+  --font-size-xs: 12px;
+  --font-size-sm: 13px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 22px;
+  --font-size-3xl: 24px;
+  --line-height-tight: 1.2;
+  --line-height-base: 1.5;
+  --line-height-relaxed: 1.7;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-pill: 999px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --control-height-sm: 32px;
+  --control-height-md: 36px;
+  --control-height-lg: 40px;
+  --control-padding-x: 12px;
+  --control-icon-size: 14px;
+  --control-text-disabled: var(--color-text-muted);
+  --choice-size: 16px;
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --duration-slow: 240ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --z-index-dropdown: 120;
+  --z-index-modal-backdrop: 100;
+  --z-index-modal: 2000;
+  --z-index-confirm-modal: 3000;
+  --z-index-toast: 5000;
+  --z-index-tooltip: 140;
+
+  /* === 色彩 Token === */
+  --color-primary: var(--color-accent);
+  --color-primary-hover: var(--color-accent-hover);
+  --color-primary-light: var(--color-accent-soft);
+  --color-primary-shadow: rgba(59, 130, 246, 0.2);
+
+  --color-text-primary: var(--color-text);
+  --color-text-disabled: #ccc;
+
+  --color-border-hover: var(--color-border-strong);
+  --color-border-focus: var(--color-accent);
+
+  --color-bg-page: var(--color-bg);
+  --color-bg-card: var(--color-surface);
+  --color-bg-hover: var(--color-surface-hover);
+  --color-bg-disabled: var(--control-bg-disabled);
+
+  --color-overlay: rgba(0, 0, 0, 0.4);
+
+  /* === z-index 层级规范（从高到低）===
+   * 消息提示（--z-toast, 5000）
+   *   > 确认弹窗（--z-index-confirm-modal, 3000，分配起点 3000，步进 20）
+   *     > 通用弹窗（--z-index-modal, 2000，分配起点 2000，步进 20）
+   */
+  --z-dropdown: var(--z-index-dropdown);
+  --z-tooltip: var(--z-index-tooltip);
+  --z-modal: var(--z-index-modal);
+  --z-confirm-modal: var(--z-index-confirm-modal);
+  --z-toast: var(--z-index-toast);
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-bg: #eef1f5;
+  --color-surface: #ffffff;
+  --color-surface-soft: #f7f8fa;
+  --color-surface-strong: #e8edf3;
+  --color-surface-hover: #f1f4f8;
+  --color-surface-active: #e8edf3;
+  --color-text: #151922;
+  --color-text-secondary: #344054;
+  --color-text-muted: #667085;
+  --color-text-subtle: #98a2b3;
+  // 表格内的弱文字：--color-text-muted 在悬停 / 选中行底色上只有约 4.5:1，这个值在 #e8f6ff 上为 5.2:1。
+  --color-text-tertiary: #5d6779;
+  // 搜索命中高亮底色，文字沿用原色。
+  --color-highlight: #fde9b0;
+  --color-placeholder: #667085;
+  --color-text-inverse: #ffffff;
+  --color-border: #d9e0e8;
+  --color-border-strong: #c4ceda;
+  --color-accent: #0a96ff;
+  --color-accent-hover: #0888e6;
+  --color-accent-active: #0677c7;
+  --color-accent-soft: #d8efff;
+  --color-accent-strong: #0b4f85;
+  --color-success: #16a34a;
+  --color-success-soft: #dcfce7;
+  --color-success-strong: #15803d;
+  --color-warning: #d97706;
+  --color-warning-soft: #fef3c7;
+  --color-warning-strong: #b45309;
+  --color-danger: #dc2626;
+  --color-danger-soft: #fee2e2;
+  // 浅色危险底上的文字色：#dc2626 在 danger-soft 上只有 3.95:1，这个值为 5.3:1。
+  --color-danger-strong: #b91c1c;
+  --color-info: #0284c7;
+  --color-info-soft: #e0f2fe;
+  // 封面叠字：图片内容未知，文字靠底部遮罩保证对比度（白字在遮罩最深处约 15:1）。
+  --color-cover-scrim: rgba(8, 12, 18, 0.9);
+  --color-cover-scrim-mid: rgba(8, 12, 18, 0.6);
+  --color-cover-chip-bg: rgba(10, 14, 20, 0.72);
+  --color-cover-text: #ffffff;
+  --color-cover-text-secondary: rgba(255, 255, 255, 0.8);
+  // 深色底上的「支持」勾选色，#16a34a 在深色标签上偏暗，这个值约 8:1。
+  --color-cover-success: #4ade80;
+  --color-shadow: rgba(15, 23, 42, 0.08);
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 10px 24px var(--color-shadow);
+  --focus-ring: 0 0 0 3px var(--color-accent-soft);
+  --control-bg: #ffffff;
+  --control-bg-hover: #f7f9fc;
+  --control-bg-disabled: #f3f5f8;
+  --control-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  --select-arrow-color: #667085;
+  --scrollbar-track-color: transparent;
+  --scrollbar-thumb-color: #c5ceda;
+  --scrollbar-thumb-hover: #9aa8bb;
+  --vx-scrollbar-track-color: transparent;
+  --vx-scrollbar-thumb-color: #c5ceda;
+  --vx-scrollbar-thumb-hover: #9aa8bb;
+  --vx-ui-font-family: var(--font-family-base);
+  --vx-ui-bg: var(--color-bg);
+  --vx-ui-surface: var(--color-surface);
+  --vx-ui-surface-muted: var(--color-surface-soft);
+  --vx-ui-border: var(--color-border);
+  --vx-ui-border-strong: var(--color-border-strong);
+  --vx-ui-text: var(--color-text);
+  --vx-ui-text-muted: var(--color-text-muted);
+  --vx-ui-text-weak: var(--color-text-subtle);
+  --vx-ui-primary: var(--color-accent);
+  --vx-ui-primary-hover: var(--color-accent-hover);
+  --vx-ui-primary-soft: var(--color-accent-soft);
+  --vx-ui-danger: var(--color-danger);
+  --vx-ui-danger-soft: var(--color-danger-soft);
+  --vx-ui-success: var(--color-success);
+  --vx-ui-warning: var(--color-warning);
+  --vx-ui-radius-sm: var(--radius-sm);
+  --vx-ui-radius-md: var(--radius-md);
+  --vx-ui-shadow-popover: var(--shadow-lg);
+  --vx-ui-focus-ring: var(--focus-ring);
+  --vx-ui-duration: var(--duration-fast);
+}
+
+.vx-ui-scrollbar::-webkit-scrollbar {
+  width: 7px;
+}
+
+.vx-ui-scrollbar::-webkit-scrollbar-track {
+  background: var(--vx-scrollbar-track-color);
+  border-radius: var(--radius-md);
+  margin: var(--space-4) 0;
+}
+
+.vx-ui-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--vx-scrollbar-thumb-color);
+  border-radius: var(--radius-xs);
+  min-height: 40px;
+}
+
+.vx-ui-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--vx-scrollbar-thumb-hover);
+}
+
+.primary-button,
+.secondary-button {
+  min-height: var(--control-height-md);
+  padding: 0 var(--space-4);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-md);
+  outline: none;
+  transition:
+    background var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+}
+
+.primary-button {
+  color: var(--color-text-inverse);
+  background: var(--color-accent);
+  border: 1px solid var(--color-accent);
+}
+
+.primary-button:hover {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+}
+
+.primary-button-danger {
+  background: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+.primary-button-danger:hover {
+  background: color-mix(in srgb, var(--color-danger) 88%, var(--color-black));
+  border-color: color-mix(in srgb, var(--color-danger) 88%, var(--color-black));
+}
+
+.secondary-button {
+  color: var(--color-text-secondary);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.secondary-button:hover {
+  color: var(--color-text);
+  background: var(--color-surface-hover);
+  border-color: var(--color-border-strong);
+}
+
+.primary-button:disabled,
+.secondary-button:disabled {
+  color: var(--color-text-subtle);
+  background: var(--control-bg-disabled);
+  border-color: var(--color-border);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.primary-button:active,
+.secondary-button:active {
+  transform: translateY(1px);
+}
+
+.base-dialog {
+  position: fixed;
+  inset: 0;
+  /* AI 助手停靠在主窗口右侧时，弹窗在剩余区域内居中 */
+  right: var(--assistant-dock-inset, 0px);
+  z-index: var(--vx-modal-z-index, 2000);
+  display: grid;
+  place-items: center;
+  padding: var(--space-6);
+  background: rgba(15, 23, 42, 0.42);
+}
+
+.base-dialog-panel {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: min(100%, 720px);
+  max-height: 70vh;
+  padding: var(--space-3) var(--space-5) var(--space-5);
+  overflow: hidden;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+// 面板只在没有可聚焦控件时被程序聚焦，不显示浏览器默认描边。
+.base-dialog-panel:focus {
+  outline: none;
+}
+
+.base-dialog-panel--plain {
+  gap: 0;
+  width: fit-content;
+  max-width: calc(100vw - 48px);
+  max-height: calc(100vh - 64px);
+  padding: 0;
+  overflow: visible;
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-md);
+  box-shadow: none;
+}
+
+.base-dialog-header {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-family: var(--font-family-base);
+}
+
+.base-dialog-heading {
+  display: grid;
+  gap: var(--space-1);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.base-dialog-heading h3 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-base);
+}
+
+.base-dialog-heading p {
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-base);
+}
+
+.base-dialog-heading p,
+.component-lab-dialog-text,
+.component-lab-feedback {
+  margin: 0;
+  color: var(--color-text-muted);
+}
+
+.base-dialog-close {
+  display: grid;
+  place-items: center;
+  width: var(--space-6);
+  height: var(--space-6);
+  padding: 0;
+  flex: 0 0 auto;
+  color: var(--color-text-secondary);
+  line-height: 1;
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+}
+
+.base-dialog-close svg {
+  width: var(--control-icon-size);
+  height: var(--control-icon-size);
+}
+
+.base-dialog-close:hover {
+  color: var(--color-text);
+  background: var(--color-surface-hover);
+}
+
+.base-dialog-close:active {
+  background: var(--color-surface-active);
+}
+
+.base-dialog-close:focus-visible {
+  outline: 2px solid var(--color-accent-active);
+  outline-offset: 2px;
+}
+
+.base-dialog-body {
+  --vx-dialog-scroll-offset: var(--space-4);
+
+  display: grid;
+  gap: var(--space-4);
+  flex: 0 1 auto;
+  min-height: 0;
+  // 滚动轨道伸入面板右侧留白，补回内容内边距以保持控件宽度。
+  margin-right: calc(-1 * var(--vx-dialog-scroll-offset));
+  padding-right: calc(var(--space-3) + var(--vx-dialog-scroll-offset));
+  overflow-x: hidden;
+  overflow-y: auto;
+  color: var(--color-text);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-base);
+  overflow-wrap: anywhere;
+  scrollbar-gutter: stable;
+}
+
+.base-dialog-content {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+// 焦点外圈最多向外延伸 4px；扩大滚动裁切区域，保持字段和标题原有对齐。
+.base-dialog-body:not(.base-dialog-body--plain) {
+  margin-left: calc(-1 * var(--space-1));
+  margin-block: calc(-1 * var(--space-1));
+  padding-left: var(--space-1);
+  padding-block: var(--space-1);
+}
+
+.base-dialog-body--plain {
+  --vx-dialog-scroll-offset: 0px;
+
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  padding-right: 0;
+  overflow: visible;
+  line-height: normal;
+  scrollbar-gutter: auto;
+}
+
+.base-dialog-body > :first-child {
+  margin-top: 0;
+}
+
+.base-dialog-body > :last-child {
+  margin-bottom: 0;
+}
+
+.base-dialog-footer,
+.base-confirm-actions,
+.component-lab-actions,
+.component-lab-inline {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.base-dialog-footer {
+  justify-content: end;
+  flex: 0 0 auto;
+  margin: 0 calc(var(--space-5) * -1) calc(var(--space-5) * -1);
+  padding: var(--space-4) var(--space-5);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+}
+
+.component-lab-dialog-stack {
+  display: grid;
+  gap: var(--space-4);
+  max-width: 900px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 1ms;
+    --duration-base: 1ms;
+    --duration-slow: 1ms;
+    --vx-ui-duration: 1ms;
+  }
+}

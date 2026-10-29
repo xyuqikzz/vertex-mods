@@ -1,0 +1,172 @@
+{
+  "upstream": "https://github.com/rakanki911/DLSS5-Swapper",
+  "version": "2.2.7",
+  "commit": "3b3b0efb5472df7fc806d7aff31c1d95819500c5",
+  "conversion": [
+    "CommonJS and browser globals to ES modules",
+    "Vue 3 components replace DOM-string rendering",
+    "Vertex IPC, shared binding records and mutation locks",
+    "Pinned release payload extracted as data; Swapper executable never launched",
+    "Independent chat, community publishing and F8 overlay application surfaces are outside the installation panel",
+    "Steam StoreBrowse asset manifest, expiring artwork cache and image fallbacks for revisioned artwork URLs",
+    "Expose the installed manifest API label to distinguish installed settings from pending UI selections"
+  ],
+  "files": [
+    {
+      "source": "src/core/apply.js",
+      "target": "src/main/services/dlss/swapper/apply.js",
+      "sourceSha256": "94f61e74fdfe68699fdab2151cdce21913ef513a6aa3e687da65eec8627d8b1a",
+      "convertedSha256": "162321b1474f26d4d2c8639faca7ee98a083ef03591ddab64596fe536882ce6a"
+    },
+    {
+      "source": "src/core/backend-manager.js",
+      "target": "src/main/services/dlss/swapper/backend-manager.js",
+      "sourceSha256": "8aacf733fb97c0f842bc1d85fdf60385dfa5f33b90fd163ec53c6a2d407a8d81",
+      "convertedSha256": "321eaa08c39db8f5234d03f3e2b1d5354035239dc1de80a7c0b49e038e37a441"
+    },
+    {
+      "source": "src/core/compatibility.js",
+      "target": "src/main/services/dlss/swapper/compatibility.js",
+      "sourceSha256": "f49f94b81fee9e91e68ba24e83a53c5249fd436075772d47a58e8e5d5fc79e10",
+      "convertedSha256": "64d09ab4c583a56bd9553c28eb82fdea343f37e3059fb144685bd230a8252c50"
+    },
+    {
+      "source": "src/core/diagnostics.js",
+      "target": "src/main/services/dlss/swapper/diagnostics.js",
+      "sourceSha256": "a925288db5794099ffbb733d37c5b8213defbf01a153910d153cc31fe869cf0c",
+      "convertedSha256": "5f564c0c2fbbefbed3e05b43ac3c0387b4bdc48c329a99ba4e4a93f571234f63"
+    },
+    {
+      "source": "src/core/emulators.js",
+      "target": "src/main/services/dlss/swapper/emulators.js",
+      "sourceSha256": "680167bc0683bc06ab8202cf0503df9cfb0e882a4955dbc2048d9d6b6d92462b",
+      "convertedSha256": "7c453ba152cf8dfae449dafc3f7ec3789d54327aafe757b8e78a22c07309cfde"
+    },
+    {
+      "source": "src/core/feeder-config.js",
+      "target": "src/main/services/dlss/swapper/feeder-config.js",
+      "sourceSha256": "532bdce23af505d1a0eb0318480287749d194f749f7cb3eca7f8922755aa485c",
+      "convertedSha256": "139552a31a4e17fec2b67e9cf1cdf769341af6ddb48af63572535d80ede883e2"
+    },
+    {
+      "source": "src/core/feeder-release.js",
+      "target": "src/main/services/dlss/swapper/feeder-release.js",
+      "sourceSha256": "8fce30b0a20e90b9cb98c1fa21bc6219dee527496464fa18e3c2a27a9c01ffc0",
+      "convertedSha256": "bd32dab3daa9e96ced0c0603d06546d9d64080a83504f1981e7ddc5854049ef2"
+    },
+    {
+      "source": "src/core/file-journal.js",
+      "target": "src/main/services/dlss/swapper/file-journal.js",
+      "sourceSha256": "6655bf983665828cc1314392d2c9c86f59faae6d479fb27309db61df95aba846",
+      "convertedSha256": "6729d4dcddfede1e6751cec2dbd3ba1c3ec83a838f34cb369655f3b28c35e9e2"
+    },
+    {
+      "source": "src/game-overlay.js",
+      "target": "src/main/services/dlss/swapper/game-overlay.js",
+      "sourceSha256": "2bb3b801a89a7db08b9df3e1b426907e61b50b916758d475b378bc691b81bbff",
+      "convertedSha256": "5a760885206e0e2fd22a857249f77d2eb7332f22a006ee439f7af55d66b876b5"
+    },
+    {
+      "source": "src/core/history.js",
+      "target": "src/main/services/dlss/swapper/history.js",
+      "sourceSha256": "261619e62c6a0b6290f2fca00c8ceda9a4169c1152d95135b621b56882830348",
+      "convertedSha256": "332344a8c1c5e67f1e2c3a770cd0d26175d4274f2e6003396d872cea45a4d1a0"
+    },
+    {
+      "source": "src/core/install-guards.js",
+      "target": "src/main/services/dlss/swapper/install-guards.js",
+      "sourceSha256": "f85808a01bde94c7dd12ac0a17c6ac2ff8c2da9b6876f20eecf5d4859015ec36",
+      "convertedSha256": "887f1dd79c0f5bcc2c7127b767d06122c729b2e6664d5d04e947028c8caec3b3"
+    },
+    {
+      "source": "src/library.js",
+      "target": "src/main/services/dlss/swapper/library.js",
+      "sourceSha256": "04465afb4f098d430ea16706f3ae08001017b0e8d8741bd21b2ebcb8aeeddb85",
+      "convertedSha256": "fdf63e41d478f5854328008fc9cdc843a9a3f5b54ae3a04ef99f1c0834d53adf"
+    },
+    {
+      "source": "src/core/optiscaler.js",
+      "target": "src/main/services/dlss/swapper/optiscaler.js",
+      "sourceSha256": "bd9d027e854dda21b7176a640382d20aa5c05d158e3306159386a8f9cdeda92f",
+      "convertedSha256": "8b077b3248d1360ccd80378e1efc1cfea1a7ffce4ea1f3fe43b7011bbc6d4cc2"
+    },
+    {
+      "source": "src/overlays.js",
+      "target": "src/main/services/dlss/swapper/overlays.js",
+      "sourceSha256": "18c24a3e87fe37a544603907500e2fcec6c71ac4c982b627412f651c914076fc",
+      "convertedSha256": "4628ca3fc91852082fbe12b85409efdde8217265f27992c0acdd5c0b66928684"
+    },
+    {
+      "source": "src/core/pe.js",
+      "target": "src/main/services/dlss/swapper/pe.js",
+      "sourceSha256": "3a912d64f780f350acf43d1b15d2a497fb332b870c84364cc9f3b1218297c7ba",
+      "convertedSha256": "7b5b286c2de31e0ddc2e3d90a3a91a00115ea02b46d039c51a0065a064527a44"
+    },
+    {
+      "source": "src/core/project-links.js",
+      "target": "src/main/services/dlss/swapper/project-links.js",
+      "sourceSha256": "d715f83ec413720253cbbd0514103d9ba8f2914d2a845f77b8892d9cbc193573",
+      "convertedSha256": "b1e2cf5a345a885d1b40f1cd35d3e85729785163f1b2c1f2658b57b9f2ea2593"
+    },
+    {
+      "source": "src/core/proton.js",
+      "target": "src/main/services/dlss/swapper/proton.js",
+      "sourceSha256": "47c40eda0f03869573b45dce115d9ec9bdbb07659ce0ccebe09827610ceeefb8",
+      "convertedSha256": "94659bb6fc8034fd18d59adad3b108172a6b9fe936f583d72daefbc044618626"
+    },
+    {
+      "source": "src/core/runtime-components.js",
+      "target": "src/main/services/dlss/swapper/runtime-components.js",
+      "sourceSha256": "37ba26bf7b819d5d42a23f8b229cb4450dff10aca32c4a16bf296552940842ee",
+      "convertedSha256": "10116fba181c2eb46919abebb79876fadafcb791b94b27f671f0cdd3c3f53cb1"
+    },
+    {
+      "source": "src/core/scan.js",
+      "target": "src/main/services/dlss/swapper/scan.js",
+      "sourceSha256": "2ac8147ee0b086d78de8c68cba2f77c9b0c1afce2de00a39acf16a49315f03c1",
+      "convertedSha256": "c954413be929d8c2619969f155e5631fff4bc6f86e50a5e066c8b2fad3465574"
+    },
+    {
+      "source": "src/steamart.js",
+      "target": "src/main/services/dlss/swapper/steamart.js",
+      "sourceSha256": "4c6d438b6809b3893e76188c9cc8f0fdcebe576813e1d6c109e132cad1022fc2",
+      "convertedSha256": "73b0b7b6ab29d3a8e41851a7a4ca5b765431f7f4eceaa7656e28e7bf2bd82d37"
+    },
+    {
+      "source": "src/core/vulkan-layer.js",
+      "target": "src/main/services/dlss/swapper/vulkan-layer.js",
+      "sourceSha256": "00b9b023541bf8b92874dd72b2bb996bc05460096b321b9337d22d368dda0953",
+      "convertedSha256": "a1a87d5ec6bf684e1f18607f85448cb3fd8b88eacebd7c75e3fe39a1553464bc"
+    },
+    {
+      "source": "src/shared/anti-cheat-warning.js",
+      "target": "src/shared/dlss-swapper/anti-cheat-warning.js",
+      "sourceSha256": "4157cf1c401ebdd7c767c6838554e1b82ef84d8fc2ef820246a2fc07bb8f201d",
+      "convertedSha256": "6aaf4a8489dbfa465493d83d70a11d14cc63cc62ce94756cf644023b046446fc"
+    },
+    {
+      "source": "src/shared/feature-i18n.js",
+      "target": "src/shared/dlss-swapper/feature-i18n.js",
+      "sourceSha256": "b2666dcb18bbfd6f22f26d80d5f3cf55a1248f81c53151902ef7693971625fef",
+      "convertedSha256": "0ceb3968706042d211d14423a9b5a67fee61f882a456b7e026de4bb2f04baa73"
+    },
+    {
+      "source": "src/renderer/i18n.js",
+      "target": "src/shared/dlss-swapper/i18n.js",
+      "sourceSha256": "e8290d54c0bf953ae73a2fd162e87363be113b182285e8727dbab99025e5b75f",
+      "convertedSha256": "42bbd6d8f09535f314106cdf4130a03ece094474866f8196fd46035236438475"
+    },
+    {
+      "source": "src/shared/install-routes.js",
+      "target": "src/shared/dlss-swapper/install-routes.js",
+      "sourceSha256": "496bd5472060e22642b5b1c27db478c7834c24c8caf3ee4d6a2761efbd35fe7e",
+      "convertedSha256": "87ea438fa3886744a63cd48aa814b159f0eec3c9d11c8b5c950b870013ba36bf"
+    },
+    {
+      "source": "src/shared/rendering-api.js",
+      "target": "src/shared/dlss-swapper/rendering-api.js",
+      "sourceSha256": "4a13d73aa254cfb713ef8fffbc73dcc8c9c81dbf1e1ae4490f1de5ed75d75045",
+      "convertedSha256": "44ff515f3072f763cc39fa50813c6718af3663e3467f1b4e3ab9a37eacb606a0"
+    }
+  ]
+}

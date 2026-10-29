@@ -1,0 +1,18 @@
+{
+  "schema_version": 5,
+  "requires": { "capabilities": ["templates.v1", "units.v1"] },
+  "templates": {
+    "bepinex-framework": {
+      "version": 1,
+      "parameters": { "target": "." },
+      "rules": [{
+        "id": "bepinex-framework",
+        "match": { "any_file_patterns": ["**/BepInEx/core/BepInEx.dll"] },
+        "declarative": {
+          "units": [{ "id": "framework", "role": "loader", "selector": { "anchor": "**/BepInEx/core/BepInEx.dll", "parent": 2, "max": 1, "companions": ["doorstop_config.ini", "winhttp.dll"] }, "target": { "base": "game", "path": "{{param:target}}" } }]
+        }
+      }]
+    }
+  },
+  "use_templates": [{ "id": "bepinex-framework", "version": 1, "parameters": { "target": "." } }]
+}

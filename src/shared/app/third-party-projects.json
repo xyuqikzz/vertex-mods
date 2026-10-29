@@ -1,0 +1,321 @@
+[
+  {
+    "name": "DepotDownloader",
+    "purposeKey": "settings.aboutProjects.purposes.depotDownloader",
+    "license": "GPL-2.0",
+    "repository": "https://github.com/SteamRE/DepotDownloader",
+    "group": "integrations"
+  },
+  {
+    "name": "DLSS5-Swapper",
+    "purposeKey": "settings.aboutProjects.purposes.dlssSwapper",
+    "license": "MIT",
+    "repository": "https://github.com/rakanki911/DLSS5-Swapper",
+    "group": "integrations"
+  },
+  {
+    "name": "aria2",
+    "purposeKey": "settings.aboutProjects.purposes.aria2",
+    "license": "GPL-2.0-or-later",
+    "repository": "https://github.com/aria2/aria2",
+    "group": "integrations"
+  },
+  {
+    "name": "7-Zip",
+    "purposeKey": "settings.aboutProjects.purposes.sevenZip",
+    "license": "LGPL-2.1-or-later, BSD, unRAR",
+    "licenseKey": "settings.aboutProjects.sevenZipLicense",
+    "noteKey": "settings.aboutProjects.sevenZipNote",
+    "licenseUrl": "https://www.7-zip.org/license.txt",
+    "repository": "https://github.com/ip7z/7zip",
+    "group": "integrations"
+  },
+  {
+    "name": "@ant-design/icons-vue",
+    "license": "MIT",
+    "repository": "https://github.com/ant-design/ant-design-icons",
+    "group": "runtime"
+  },
+  {
+    "name": "@codemirror/commands",
+    "license": "MIT",
+    "repository": "https://github.com/codemirror/commands",
+    "group": "runtime"
+  },
+  {
+    "name": "@codemirror/lang-json",
+    "license": "MIT",
+    "repository": "https://github.com/codemirror/lang-json",
+    "group": "runtime"
+  },
+  {
+    "name": "@codemirror/language",
+    "license": "MIT",
+    "repository": "https://github.com/codemirror/language",
+    "group": "runtime"
+  },
+  {
+    "name": "@codemirror/lint",
+    "license": "MIT",
+    "repository": "https://github.com/codemirror/lint",
+    "group": "runtime"
+  },
+  {
+    "name": "@codemirror/state",
+    "license": "MIT",
+    "repository": "https://github.com/codemirror/state",
+    "group": "runtime"
+  },
+  {
+    "name": "@codemirror/view",
+    "license": "MIT",
+    "repository": "https://github.com/codemirror/view",
+    "group": "runtime"
+  },
+  {
+    "name": "@electron-toolkit/eslint-config",
+    "license": "MIT",
+    "repository": "https://github.com/alex8088/electron-toolkit",
+    "group": "development"
+  },
+  {
+    "name": "@electron-toolkit/eslint-config-prettier",
+    "license": "MIT",
+    "repository": "https://github.com/alex8088/electron-toolkit",
+    "group": "development"
+  },
+  {
+    "name": "@electron-toolkit/utils",
+    "license": "MIT",
+    "repository": "https://github.com/alex8088/electron-toolkit",
+    "group": "runtime"
+  },
+  {
+    "name": "@electron/rebuild",
+    "license": "MIT",
+    "repository": "https://github.com/electron/rebuild",
+    "group": "development"
+  },
+  {
+    "name": "@lezer/highlight",
+    "license": "MIT",
+    "repository": "https://github.com/lezer-parser/highlight",
+    "group": "runtime"
+  },
+  {
+    "name": "@vitejs/plugin-vue",
+    "license": "MIT",
+    "repository": "https://github.com/vitejs/vite-plugin-vue",
+    "group": "development"
+  },
+  {
+    "name": "adm-zip",
+    "license": "MIT",
+    "repository": "https://github.com/cthackers/adm-zip",
+    "group": "runtime"
+  },
+  {
+    "name": "ant-design-vue",
+    "license": "MIT",
+    "repository": "https://github.com/vueComponent/ant-design-vue",
+    "group": "runtime"
+  },
+  {
+    "name": "archiver",
+    "license": "MIT",
+    "repository": "https://github.com/archiverjs/node-archiver",
+    "group": "runtime"
+  },
+  {
+    "name": "axios",
+    "license": "MIT",
+    "repository": "https://github.com/axios/axios",
+    "group": "runtime"
+  },
+  {
+    "name": "better-sqlite3",
+    "license": "MIT",
+    "repository": "https://github.com/WiseLibs/better-sqlite3",
+    "group": "runtime"
+  },
+  {
+    "name": "cheerio",
+    "license": "MIT",
+    "repository": "https://github.com/cheeriojs/cheerio",
+    "group": "runtime"
+  },
+  {
+    "name": "codemirror",
+    "license": "MIT",
+    "repository": "https://github.com/codemirror/basic-setup",
+    "group": "runtime"
+  },
+  {
+    "name": "crypto-js",
+    "license": "MIT",
+    "repository": "https://github.com/brix/crypto-js",
+    "group": "runtime"
+  },
+  {
+    "name": "electron",
+    "license": "MIT",
+    "repository": "https://github.com/electron/electron",
+    "group": "runtime"
+  },
+  {
+    "name": "electron-builder",
+    "license": "MIT",
+    "repository": "https://github.com/electron-userland/electron-builder",
+    "group": "development"
+  },
+  {
+    "name": "electron-store",
+    "license": "MIT",
+    "repository": "https://github.com/sindresorhus/electron-store",
+    "group": "runtime"
+  },
+  {
+    "name": "electron-updater",
+    "license": "MIT",
+    "repository": "https://github.com/electron-userland/electron-builder",
+    "group": "runtime"
+  },
+  {
+    "name": "electron-vite",
+    "license": "MIT",
+    "repository": "https://github.com/alex8088/electron-vite",
+    "group": "development"
+  },
+  {
+    "name": "eslint",
+    "license": "MIT",
+    "repository": "https://github.com/eslint/eslint",
+    "group": "development"
+  },
+  {
+    "name": "eslint-plugin-vue",
+    "license": "MIT",
+    "repository": "https://github.com/vuejs/eslint-plugin-vue",
+    "group": "development"
+  },
+  {
+    "name": "file-icons-vue",
+    "license": "ISC",
+    "repository": "https://github.com/zyyzyykk/file-icons-vue",
+    "group": "runtime"
+  },
+  {
+    "name": "fs-extra",
+    "license": "MIT",
+    "repository": "https://github.com/jprichardson/node-fs-extra",
+    "group": "runtime"
+  },
+  {
+    "name": "highlight.js",
+    "license": "BSD-3-Clause",
+    "repository": "https://github.com/highlightjs/highlight.js",
+    "group": "runtime"
+  },
+  {
+    "name": "marked",
+    "license": "MIT",
+    "repository": "https://github.com/markedjs/marked",
+    "group": "runtime"
+  },
+  {
+    "name": "node-gyp",
+    "license": "MIT",
+    "repository": "https://github.com/nodejs/node-gyp",
+    "group": "development"
+  },
+  {
+    "name": "node-screenshots",
+    "license": "Apache-2.0",
+    "repository": "https://github.com/nashaofu/node-screenshots",
+    "group": "runtime"
+  },
+  {
+    "name": "openai",
+    "license": "Apache-2.0",
+    "repository": "https://github.com/openai/openai-node",
+    "group": "runtime"
+  },
+  {
+    "name": "pinia",
+    "license": "MIT",
+    "repository": "https://github.com/vuejs/pinia",
+    "group": "runtime"
+  },
+  {
+    "name": "pinia-plugin-persistedstate",
+    "license": "MIT",
+    "repository": "https://github.com/prazdevs/pinia-plugin-persistedstate",
+    "group": "runtime"
+  },
+  {
+    "name": "prettier",
+    "license": "MIT",
+    "repository": "https://github.com/prettier/prettier",
+    "group": "development"
+  },
+  {
+    "name": "sass",
+    "license": "MIT",
+    "repository": "https://github.com/sass/dart-sass",
+    "group": "development"
+  },
+  {
+    "name": "systeminformation",
+    "license": "MIT",
+    "repository": "https://github.com/sebhildebrandt/systeminformation",
+    "group": "runtime"
+  },
+  {
+    "name": "uuid",
+    "license": "MIT",
+    "repository": "https://github.com/uuidjs/uuid",
+    "group": "runtime"
+  },
+  {
+    "name": "vite",
+    "license": "MIT",
+    "repository": "https://github.com/vitejs/vite",
+    "group": "development"
+  },
+  {
+    "name": "vite-svg-loader",
+    "license": "MIT",
+    "repository": "https://github.com/jpkleemans/vite-svg-loader",
+    "group": "development"
+  },
+  {
+    "name": "vue",
+    "license": "MIT",
+    "repository": "https://github.com/vuejs/core",
+    "group": "runtime"
+  },
+  {
+    "name": "vue-i18n",
+    "license": "MIT",
+    "repository": "https://github.com/intlify/vue-i18n",
+    "group": "runtime"
+  },
+  {
+    "name": "vue-router",
+    "license": "MIT",
+    "repository": "https://github.com/vuejs/router",
+    "group": "runtime"
+  },
+  {
+    "name": "winreg",
+    "license": "BSD-2-Clause",
+    "repository": "https://github.com/fresc81/node-winreg",
+    "group": "runtime"
+  },
+  {
+    "name": "yauzl",
+    "license": "MIT",
+    "repository": "https://github.com/thejoshwolfe/yauzl",
+    "group": "runtime"
+  }
+]

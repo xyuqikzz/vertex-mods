@@ -1,0 +1,8 @@
+DepotDownloader 3.4.0 with Vertex session integration (Windows x64)
+License: GPL-2.0, see LICENSE-DepotDownloader.txt
+Project and corresponding source: https://github.com/SteamRE/DepotDownloader/tree/DepotDownloader_3.4.0
+Vertex modifications: private-pipe JSON session transfer, an authentication-only entry,
+and a successful-login marker. Steam authentication and download protocols are unchanged.
+Corresponding modified source: DepotDownloader-source.zip (included alongside this notice).
+Rebuild: node scripts/build-workshop-tool.mjs in the Vertex source tree.
+Pinned upstream and generated binary hashes: tool-manifest.json.

@@ -1,0 +1,142 @@
+// 安装确认弹窗内共享的标签与读屏样式。弹窗通过 Teleport 渲染到 body，这里用 .icd- 前缀限定范围。
+// 标签文字统一用 *-strong 色，保证在浅色底上对比度 ≥ 4.5:1（VxTag 现有 accent / info / danger 文字色不达标）。
+
+.icd-tag {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  min-height: 20px;
+  padding: 0 6px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-soft);
+  color: var(--color-text-secondary);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.2;
+  white-space: nowrap;
+
+  &.is-outline {
+    background: var(--color-surface);
+    font-weight: var(--font-weight-medium);
+  }
+
+  &.is-accent,
+  &.is-info {
+    background: var(--color-accent-soft);
+    border-color: color-mix(in srgb, var(--color-accent) 22%, var(--color-border) 78%);
+    color: var(--color-accent-strong);
+  }
+
+  &.is-info {
+    background: var(--color-info-soft);
+  }
+
+  &.is-success {
+    background: var(--color-success-soft);
+    border-color: color-mix(in srgb, var(--color-success) 22%, var(--color-border) 78%);
+    color: var(--color-success-strong);
+  }
+
+  &.is-warning {
+    background: var(--color-warning-soft);
+    border-color: color-mix(in srgb, var(--color-warning) 24%, var(--color-border) 76%);
+    color: var(--color-warning-strong);
+  }
+
+  &.is-danger {
+    background: var(--color-danger-soft);
+    border-color: color-mix(in srgb, var(--color-danger) 22%, var(--color-border) 78%);
+    color: var(--color-danger-strong);
+  }
+}
+
+.icd-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.icd-mono {
+  font-family: var(--font-family-mono);
+}
+
+.icd-spinner {
+  display: inline-block;
+  flex: none;
+  box-sizing: border-box;
+  width: 14px;
+  height: 14px;
+  margin-top: 3px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  color: var(--color-text-muted);
+  animation: icd-spin 700ms linear infinite;
+}
+
+.icd-icon-button {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard);
+
+  svg {
+    width: var(--control-icon-size);
+    height: var(--control-icon-size);
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+  }
+
+  &.is-small {
+    color: var(--color-text-muted);
+
+    svg {
+      width: 12px;
+      height: 12px;
+    }
+  }
+
+  &:hover:not(:disabled) {
+    background: var(--color-surface-hover);
+    color: var(--color-text);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-accent-active);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    color: var(--color-text-subtle);
+    cursor: not-allowed;
+  }
+}
+
+@keyframes icd-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icd-spinner {
+    animation: none;
+  }
+}

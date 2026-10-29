@@ -1,0 +1,69 @@
+{
+  "@ant-design/icons-svg@4.4.2": {
+    "file": "npm-upstream/ant-design-ant-design-icons-038764e4e464.txt",
+    "url": "https://github.com/ant-design/ant-design-icons/blob/038764e4e46499212751a452704f64231fa756ba/LICENSE",
+    "sha256": "5d367fb0a07340571542eb4ee8eb1add62d37b71bad6786a57c2e9a86bf76c70"
+  },
+  "@ant-design/icons-vue@7.0.1": {
+    "file": "npm-upstream/ant-design-ant-design-icons-a8b4733c27d0.txt",
+    "url": "https://github.com/ant-design/ant-design-icons/blob/a8b4733c27d0c49efe298e4a30146af0d91b10b3/LICENSE",
+    "sha256": "5d367fb0a07340571542eb4ee8eb1add62d37b71bad6786a57c2e9a86bf76c70"
+  },
+  "@esbuild/win32-x64@0.25.9": {
+    "file": "npm-upstream/evanw-esbuild-195e05c16f03.txt",
+    "url": "https://github.com/evanw/esbuild/blob/195e05c16f03a341390feef38b8ebf17d3075e14/LICENSE.md",
+    "sha256": "b40ec5baec7bb34fa5b1c09521fa3cd52d5fad7adafed74932a2010d3612a681"
+  },
+  "@pkgr/core@0.3.6": {
+    "file": "npm-upstream/un-ts-pkgr-6e1c7260486c.txt",
+    "url": "https://github.com/un-ts/pkgr/blob/6e1c7260486c7251e61404176a293986229a5869/LICENSE",
+    "sha256": "82a222189ab9764f8ec1c052b9661f2c9f12db52387312acbf73b2be5b8b6c32"
+  },
+  "@rollup/rollup-win32-x64-gnu@4.66.0": {
+    "file": "npm-upstream/rollup-rollup-4de8104f55fe.txt",
+    "url": "https://github.com/rollup/rollup/blob/4de8104f55fe5c0df06aab54c1f9f2967dbe66ac/LICENSE.md",
+    "sha256": "fa1bd040c5bdeefe65b3821cebf474f2733ce65df13089bd151dda1778e62fe8"
+  },
+  "@rollup/rollup-win32-x64-msvc@4.66.0": {
+    "file": "npm-upstream/rollup-rollup-4de8104f55fe.txt",
+    "url": "https://github.com/rollup/rollup/blob/4de8104f55fe5c0df06aab54c1f9f2967dbe66ac/LICENSE.md",
+    "sha256": "fa1bd040c5bdeefe65b3821cebf474f2733ce65df13089bd151dda1778e62fe8"
+  },
+  "@vue/devtools-api@6.6.4": {
+    "file": "npm-upstream/vuejs-vue-devtools-df6ab6bb7791.txt",
+    "url": "https://github.com/vuejs/devtools-v6/blob/df6ab6bb7791a7a525a97990de73b3ea5e9a1941/LICENSE",
+    "sha256": "050bbca6960784db52ff387271bf2ecc5cbed7cf8581b415d528a6ecb6585015"
+  },
+  "file-icons-vue@1.3.4": {
+    "file": "npm-upstream/zyyzyykk-file-icons-vue-84a8604ec0e0.txt",
+    "url": "https://github.com/zyyzyykk/file-icons-vue/blob/84a8604ec0e036822920126ecaa20d3390aa1449/LICENSE",
+    "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "filelist@1.0.6": {
+    "file": "npm-upstream/mde-filelist-v1.0.6.txt",
+    "url": "https://github.com/mde/filelist/blob/v1.0.6/LICENSE",
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  "jake@10.9.4": {
+    "file": "npm-upstream/jakejs-jake-v10.9.4.txt",
+    "url": "https://github.com/jakejs/jake/blob/v10.9.4/LICENSE",
+    "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+  },
+  "node-screenshots-win32-x64-msvc@0.2.8": {
+    "file": "npm-upstream/nashaofu-node-screenshots-c74c32b19447.txt",
+    "url": "https://github.com/nashaofu/node-screenshots/blob/c74c32b1944731eba5d492682e06d4b241ad5cd9/LICENSE",
+    "sha256": "02965ed67e29f871a53f7a7afa593a0ddc8020f86ccce0faaf1aa59215b5269e"
+  },
+  "app-builder-lib@26.18.1": {
+    "file": "npm-upstream/builder-util-26.18.1.txt",
+    "url": "https://github.com/electron-userland/electron-builder/tree/v26.18.1",
+    "sha256": "bed8d0ab3e6031817f775a641ff37313b0f5591bc8ba0ed79b978dafbd4231ce",
+    "origin": "Installed sibling builder-util@26.18.1/LICENSE; same repository, version and license"
+  },
+  "dmg-builder@26.18.1": {
+    "file": "npm-upstream/builder-util-26.18.1.txt",
+    "url": "https://github.com/electron-userland/electron-builder/tree/v26.18.1",
+    "sha256": "bed8d0ab3e6031817f775a641ff37313b0f5591bc8ba0ed79b978dafbd4231ce",
+    "origin": "Installed sibling builder-util@26.18.1/LICENSE; same repository, version and license"
+  }
+}

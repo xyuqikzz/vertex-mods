@@ -1,0 +1,82 @@
+:root {
+  /* ==================== 颜色相关配置 ==================== */
+
+  /* 主题色 - 用于按钮、高亮元素等主要交互元素 */
+  --themecolor: #0a96ff;
+
+  /* 应用窗口圆角 - 统一窗口边框圆角 */
+  --app-window-border-radius: 6px;
+
+  /* 左侧菜单背景色 - 应用左侧导航菜单的背景颜色 */
+  --left-view-bc: #eef1f4;
+
+  /* 右侧顶部背景色 - 应用右侧区域顶部背景（如标题栏） */
+  --right-view-top-bc: #f1f3f5;
+
+  /* 右侧容器背景色 - 应用右侧主要内容区域的背景 */
+  --right-view-bottom-bc: #f5f7fa;
+
+  /* 单页背景色 - 独立页面的默认背景颜色 */
+  --app-view-bc: #edf1f3;
+
+  /* 默认文本颜色 - 普通正文文本颜色 */
+  --default-text-color: #333333;
+
+  /* 重点文本颜色 - 标题、强调文本等 */
+  --primary-text-color: #111111;
+
+  /* 提示文本颜色 - 辅助说明性文字、占位文本 */
+  --info-text-color: #c8c8c8;
+
+  /* 选项文本颜色 - 列表项、可选项目的文本颜色 */
+  --option-color: #666666;
+
+  /* 描述文本颜色 - 次级说明文字 */
+  --desc-color: #6c6c6c;
+
+  /* 选中菜单文本颜色 - 菜单选中状态的文字颜色 */
+  --selected-menu-color: #ffffff;
+
+  /* 滚动条滑块颜色 - 滚动条拖动按钮的颜色 */
+  --scrollbar-thumb-color: #c1c1c1;
+
+  /* 滚动条滑块悬停颜色 - 鼠标悬停时滚动条颜色 */
+  --scrollbar-thumb-hover: #a8a8a8;
+
+  /* 滚动条轨道颜色 - 滚动条背景色 */
+  --scrollbar-track-color: #f0f0f0;
+
+  --btn-action-background: #e0e3e7;
+  --btn-action-disabled-background: #eef0f4;
+
+  /* ==================== 圆角相关配置 ==================== */
+
+  /* 默认圆角 - 按钮、输入框等常规元素的圆角 */
+  --default-border-radius: 6px;
+
+  /* 二级圆角 - 卡片、较大组件等 */
+  --secondary-border-radius: 8px;
+
+  /* 三级圆角 - 大卡片、特殊组件等 */
+  --tertiary-border-radius: 12px;
+
+  /* 四级圆角 - 超大圆角（如胶囊按钮） */
+  --quaternary-border-radius: 50px;
+
+  /* 圆形圆角 - 圆形头像、图标等 */
+  --round-border-radius: 50%;
+
+  /* ==================== 字体相关配置 ==================== */
+
+  /* 默认字体大小 - 普通正文文本大小 */
+  --default-font-size: 14px;
+
+  /* 菜单字体大小 - 导航菜单项的文本大小 */
+  --menu--font-size: 16px;
+
+  /* 大标题字体大小 - 主标题（基于默认字体的2倍大小） */
+  --title-font-size: calc(var(--default-font-size) * 2);
+
+  /* 二级标题字体大小 - 副标题/节标题 */
+  --subtitle-font-size: 24px;
+}

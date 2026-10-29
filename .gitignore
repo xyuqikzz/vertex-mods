@@ -1,0 +1,94 @@
+# 依赖、编译输出和本地工具缓存
+node_modules/
+/dist/
+/out/
+/output/
+.cache/
+.vite/
+.npm/
+.pnpm-store/
+.eslintcache
+.stylelintcache
+*.tsbuildinfo
+
+# 测试报告、临时实验和运行日志
+/artifacts/
+/.scratch/
+/.codex-smoke/
+/coverage/
+/.nyc_output/
+/test-results/
+/playwright-report/
+/blob-report/
+/logs/
+/tmp/
+/temp/
+*.log*
+*.stackdump
+*.dmp
+
+# 本机 IDE、智能体配置、代码索引和一次性验收记录
+.idea/
+.vscode/
+.codegraph/
+/.codex/
+/.claude/
+/.agents/
+/.cursor/
+/.gemini/
+AGENTS.md
+AGENTS.override.md
+CLAUDE.md
+GEMINI.md
+/.cursorrules
+/.github/copilot-instructions.md
+/.github/instructions/
+/.github/prompts/
+/PRODUCT.md
+/codegraph.json
+/design-qa.md
+/src/renderer/src/docs/component-optimization-plan.md
+
+# 实际环境配置、凭据和签名材料；仅保留无凭据的配置模板
+.env
+.env.*
+!.env.example
+/secrets/
+/credentials/
+*.pfx
+*.p12
+*.key
+*.pem
+*.jks
+*.keystore
+
+# 本地数据库及其事务文件；建表和迁移 SQL 仍需提交
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3
+*.sqlite3-journal
+*.sqlite3-wal
+*.sqlite3-shm
+
+# 系统元数据、编辑器交换文件和临时备份
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.swp
+*.swo
+*~
+*.tmp
+*.temp
+*.bak
+*.orig
+*.rej
+
+# 不按扩展名排除 exe/dll/node/zip，也不排除 resources、tools、scripts：
+# 它们包含运行必需的原生模块、第三方工具、对应源码、许可证和构建入口。

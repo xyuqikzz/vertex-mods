@@ -1,0 +1,169 @@
+/* Vertex Mod Installer 浮动面板样式 */
+#vertex-ext-panel {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 280px;
+  background: #1a1a2e;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(99, 102, 241, 0.1);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  z-index: 2147483647;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#vertex-ext-panel.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+#vertex-ext-panel.hidden {
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  pointer-events: none;
+}
+
+.vertex-ext-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: rgba(99, 102, 241, 0.08);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.15);
+}
+
+.vertex-ext-logo {
+  width: 24px;
+  height: 24px;
+  display: block;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.vertex-ext-title {
+  flex: 1;
+  color: #e0e0f0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.vertex-ext-close {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: #64748b;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.vertex-ext-close:hover {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+.vertex-ext-body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.vertex-ext-mod-name {
+  color: #f1f5f9;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.vertex-ext-source {
+  color: #64748b;
+  font-size: 11px;
+  margin-bottom: 4px;
+}
+
+.vertex-ext-btn {
+  width: 100%;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+}
+
+.vertex-ext-btn:hover {
+  background: linear-gradient(135deg, #818cf8, #6366f1);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+  transform: translateY(-1px);
+}
+
+.vertex-ext-btn:active {
+  transform: translateY(0);
+}
+
+.vertex-ext-btn.loading {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.vertex-ext-footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-top: 1px solid rgba(99, 102, 241, 0.1);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.vertex-ext-badge {
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.vertex-ext-id {
+  color: #475569;
+  font-size: 10px;
+  font-family: monospace;
+}
+
+.vertex-ext-status {
+  color: #94a3b8;
+  font-size: 11px;
+  text-align: center;
+  padding: 4px 0;
+}
+
+.vertex-ext-status.error {
+  color: #f87171;
+}
+
+.vertex-ext-status.success {
+  color: #4ade80;
+}
