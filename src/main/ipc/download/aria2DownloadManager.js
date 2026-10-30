@@ -523,6 +523,9 @@ export class Aria2DownloadManager {
       `--rpc-listen-port=${this.rpcPort}`,
       `--rpc-secret=${this.rpcSecret}`,
       '--console-log-level=warn',
+      // Windows 下 c-ares 可能反复选择无路由的 IPv6 地址，耗尽重试却未连接 IPv4。
+      // 使用系统解析器的地址排序，保留系统实际可用的 IPv4 / IPv6 路径。
+      ...(process.platform === 'win32' ? ['--async-dns=false'] : []),
       '--summary-interval=0',
       '--continue=true',
       '--allow-overwrite=false',

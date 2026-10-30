@@ -453,7 +453,7 @@ onBeforeUnmount(() => {
     @drop.prevent.stop="drop"
   >
     <header class="tool-toolbar">
-      <ToolFilterPills v-model="statusFilter" :options="filterOptions" :label="tt('按状态筛选')" />
+      <ToolFilterPills v-model="statusFilter" variant="accent" :options="filterOptions" :label="tt('按状态筛选')" />
       <div class="tool-toolbar__tools">
         <ToolSearchField
           v-model="keyword"

@@ -58,6 +58,7 @@ const modalMode = ref('download')
 const deletingTrainerKey = ref('')
 const trainerStateMap = reactive({})
 const listError = ref('')
+const lastRequestedPage = ref(1)
 const runningKey = ref('')
 const deleteConfirmOpen = ref(false)
 const failedCovers = reactive({})
@@ -348,8 +349,9 @@ function openOfficialSite(url = FLING_HOME_URL) {
   ipcRenderer.send('openBrowse', { url: safeUrl })
 }
 
-async function loadList(page = 1) {
+async function loadList(page = 1, { preserveOnError = false } = {}) {
   const currentToken = ++listLoadToken
+  lastRequestedPage.value = page
   loading.value = true
   listError.value = ''
   try {
@@ -372,9 +374,11 @@ async function loadList(page = 1) {
     console.error('获取风灵月影列表失败', error)
     // 失败原因在列表上方的错误提示条里显示，并提供重试。
     listError.value = String(error?.message || tt('未知错误'))
-    pageData.records = []
-    pageData.total = 0
-    pageData.hasNext = false
+    if (!preserveOnError) {
+      pageData.records = []
+      pageData.total = 0
+      pageData.hasNext = false
+    }
   } finally {
     if (currentToken === listLoadToken) {
       loading.value = false
@@ -422,7 +426,8 @@ function refreshCurrentScope() {
 }
 
 function changePage(page) {
-  loadList(page)
+  if (loading.value) return
+  return loadList(page, { preserveOnError: true })
 }
 
 async function openVersionModal(item = {}, mode = 'download') {
@@ -701,13 +706,37 @@ function getTrainerStatus(item = {}) {
   return getTrainerState(item)?.status || ''
 }
 
+function getCoverCandidates(item = {}) {
+  const candidates = []
+  for (const value of [item?.coverUrl, item?.logoUrl]) {
+    const source = String(value || '').trim()
+    if (!source) continue
+    try {
+      const url = new URL(source)
+      // 官网列表的 WordPress 方形缩略图已经裁掉画面，优先取同目录完整原图。
+      // 仅处理官网上传资源，原图不存在时仍可回退到原始缩略图。
+      if (
+        url.protocol === 'https:' &&
+        ['flingtrainer.com', 'www.flingtrainer.com'].includes(url.hostname) &&
+        url.pathname.startsWith('/wp-content/uploads/')
+      ) {
+        url.pathname = url.pathname.replace(/-\d+x\d+(\.(?:jpe?g|png|webp))$/i, '$1')
+        candidates.push(url.href)
+      }
+    } catch {
+      // 本地记录或非标准图片地址沿用原值。
+    }
+    candidates.push(source)
+  }
+  return [...new Set(candidates)]
+}
+
 function getCoverImage(item = {}) {
-  const url = String(item?.coverUrl || item?.logoUrl || '').trim()
-  return url && !failedCovers[url] ? url : ''
+  return getCoverCandidates(item).find((url) => !failedCovers[url]) || ''
 }
 
 function markCoverFailed(item = {}) {
-  const url = String(item?.coverUrl || item?.logoUrl || '').trim()
+  const url = getCoverImage(item)
   if (url) failedCovers[url] = true
 }
 
@@ -824,6 +853,7 @@ onMounted(() => {
     <header class="tool-toolbar">
       <ToolFilterPills
         v-model="activeDataScope"
+        variant="accent"
         :options="dataScopeOptions"
         :label="tt('数据范围')"
       />
@@ -862,7 +892,7 @@ onMounted(() => {
     <ToolNotice v-if="listError && !isLocalMode" tone="danger" :title="tt('获取风灵月影列表失败')">
       {{ serviceText(listError) }}
       <template #actions>
-        <VxButton variant="secondary" size="sm" @click="loadList(pageData.current || 1)">
+        <VxButton variant="secondary" size="sm" :disabled="loading" @click="loadList(lastRequestedPage, { preserveOnError: true })">
           {{ tt('重试') }}
         </VxButton>
       </template>
@@ -871,7 +901,7 @@ onMounted(() => {
     <section
       v-if="showLibrary"
       class="fling-library"
-      :aria-busy="loading"
+      :aria-busy="!isLocalMode && loading"
       :aria-label="sectionTitle"
     >
       <div class="tool-section-head">
@@ -884,10 +914,11 @@ onMounted(() => {
         </p>
       </div>
 
-      <div v-if="isInitialLoading" class="tool-cover-grid" aria-hidden="true">
-        <div v-for="index in skeletonCount" :key="index" class="tool-skeleton-card">
+      <div v-if="!isLocalMode && loading" class="tool-cover-grid fling-loading-grid" aria-hidden="true">
+        <div v-for="index in pageData.records.length || skeletonCount" :key="index" class="tool-skeleton-card">
           <span class="tool-skeleton is-cover"></span>
           <span class="tool-skeleton is-line"></span>
+          <span class="tool-skeleton is-short"></span>
           <span class="tool-skeleton is-short"></span>
         </div>
       </div>
@@ -913,6 +944,7 @@ onMounted(() => {
         :size="pageData.size"
         :current-count="pageData.hasNext ? pageData.size : pageData.records.length"
         :show-total="hasSearchMode"
+        :loading="loading"
         @change="changePage"
       />
     </section>
@@ -1085,6 +1117,45 @@ onMounted(() => {
   gap: var(--space-4);
 }
 
+.fling-loading-grid {
+  animation: fling-loading-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes fling-loading-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fling-loading-grid {
+    animation: none;
+  }
+}
+
+// 与官网横版封面比例一致；完整展示标题，方图和异常比例图片留边而不再次裁切。
+.trainer-card :deep(.tool-cover-card__cover),
+.fling-library .tool-skeleton.is-cover {
+  aspect-ratio: 460 / 215;
+  border-radius: var(--radius-md);
+}
+
+.trainer-card :deep(.tool-cover-card__cover) {
+  img {
+    object-fit: contain;
+    background: var(--color-surface-soft);
+  }
+}
+
+.trainer-card:hover :deep(.tool-cover-card__cover:not(:disabled)) {
+  transform: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.trainer-card :deep(.tool-cover-card__cover:focus-visible),
+.trainer-card:hover :deep(.tool-cover-card__cover:focus-visible) {
+  box-shadow: var(--focus-ring);
+}
+
 .fling-button-content {
   display: inline-flex;
   align-items: center;
@@ -1128,7 +1199,7 @@ onMounted(() => {
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
   }
 }
 

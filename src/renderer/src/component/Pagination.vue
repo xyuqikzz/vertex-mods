@@ -10,7 +10,7 @@
         @click="handlePageChange(currentPage - 1)"
       >
         <span
-          v-if="loading && pendingPage === currentPage - 1"
+          v-if="loading && pendingDirection === -1"
           class="vx-pagination__spinner"
         ></span>
         <ToolIcon v-else name="chevron-left" :size="16" />
@@ -57,7 +57,7 @@
         @click="handlePageChange(currentPage + 1)"
       >
         <span
-          v-if="loading && pendingPage === currentPage + 1"
+          v-if="loading && pendingDirection === 1"
           class="vx-pagination__spinner"
         ></span>
         <ToolIcon v-else name="chevron-right" :size="16" />
@@ -115,6 +115,7 @@ const emit = defineEmits(['update:current', 'update:size', 'change'])
 const currentPage = ref(props.current)
 const localSize = ref(props.size)
 const pendingPage = ref(0)
+const pendingDirection = ref(0)
 
 const hasKnownTotalPages = computed(() => props.pages > 0 || props.total > 0)
 
@@ -134,7 +135,10 @@ watch(
   () => props.current,
   (val) => {
     currentPage.value = val
-    pendingPage.value = 0
+    if (!props.loading) {
+      pendingPage.value = 0
+      pendingDirection.value = 0
+    }
   }
 )
 watch(
@@ -146,7 +150,12 @@ watch(
 watch(
   () => props.loading,
   (val) => {
-    if (!val) pendingPage.value = 0
+    if (!val) {
+      // 请求失败时父级页码可能未变化，结束加载后也需恢复已确认的页码。
+      currentPage.value = props.current
+      pendingPage.value = 0
+      pendingDirection.value = 0
+    }
   }
 )
 
@@ -215,8 +224,9 @@ function submitJump() {
 }
 
 const handlePageChange = (page) => {
-  if (page < 1 || page > totalPages.value || page === currentPage.value) return
+  if (props.loading || page < 1 || page > totalPages.value || page === currentPage.value) return
   pendingPage.value = page
+  pendingDirection.value = Math.sign(page - currentPage.value)
   currentPage.value = page
   emit('update:current', page)
   emit('change', page, localSize.value)

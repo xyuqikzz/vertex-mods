@@ -797,6 +797,7 @@ onMounted(() => {
     <header class="tool-toolbar">
       <ToolFilterPills
         v-model="kindFilter"
+        variant="accent"
         :options="filterOptions"
         :label="tt('按可操作性筛选')"
       />

@@ -1,10 +1,11 @@
 <script setup>
-// 与「我的游戏」来源胶囊同规格：选中为深色底白字，数量用等宽数字。
+// 工具页使用 accent 方圆角主题色样式；其他调用保留默认胶囊样式。
 defineProps({
   // [{ value, label, count }]，count 为 null / undefined 时不显示数量。
   options: { type: Array, required: true },
   modelValue: { type: [String, Number], required: true },
   label: { type: String, default: '' },
+  variant: { type: String, default: 'neutral' },
   disabled: { type: Boolean, default: false }
 })
 
@@ -18,7 +19,7 @@ function select(value, current) {
 </script>
 
 <template>
-  <div class="tool-pills" role="group" :aria-label="label || undefined">
+  <div class="tool-pills" :class="{ 'is-accent': variant === 'accent' }" role="group" :aria-label="label || undefined">
     <button
       v-for="option in options"
       :key="option.value"
@@ -93,6 +94,51 @@ function select(value, current) {
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
   font-variant-numeric: tabular-nums;
+}
+
+.tool-pills.is-accent .tool-pills__item {
+  min-width: 0;
+  max-width: 100%;
+  min-height: var(--control-height-sm);
+  height: auto;
+  padding: var(--space-1) 14px;
+  border-radius: var(--radius-md);
+
+  .tool-pills__label {
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .tool-pills__count {
+    flex-shrink: 0;
+  }
+
+  &:hover:not(.is-active):not(:disabled) {
+    color: var(--color-accent-strong);
+    background: var(--color-accent-soft);
+  }
+
+  &.is-active {
+    background: var(--color-accent);
+
+    .tool-pills__count {
+      color: inherit;
+    }
+
+    &:hover:not(:disabled) {
+      background: var(--color-accent-hover);
+    }
+  }
+
+  &:active:not(:disabled) {
+    color: var(--color-text-inverse);
+    background: var(--color-accent-active);
+
+    .tool-pills__count {
+      color: inherit;
+    }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

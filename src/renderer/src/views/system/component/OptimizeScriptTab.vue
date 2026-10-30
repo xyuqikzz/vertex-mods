@@ -334,6 +334,7 @@ useIpc('executeSystemScriptResult', (result) => {
     <header class="tool-toolbar">
       <ToolFilterPills
         :model-value="selectedType"
+        variant="accent"
         :options="typeOptions"
         :label="tt('按类型筛选')"
         class="type-filter"

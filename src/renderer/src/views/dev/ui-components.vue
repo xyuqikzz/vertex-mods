@@ -2,9 +2,11 @@
 import { useI18n } from 'vue-i18n'
 const { t: uiText } = useI18n()
 
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import PageBody from '@renderer/component/page-body.vue'
+import Pagination from '@renderer/component/Pagination.vue'
+import { ToolCoverCard, ToolFilterPills } from '@renderer/component/tool-page'
 import {
   VxBadge,
   VxButton,
@@ -40,6 +42,29 @@ const form = ref({
 })
 
 const loadingPreview = ref(false)
+const paginationPreview = ref(1)
+const paginationLoading = ref(false)
+let paginationTimer
+function previewPaginationChange(page) {
+  if (paginationLoading.value) return
+  paginationLoading.value = true
+  paginationTimer = setTimeout(() => {
+    paginationPreview.value = page
+    paginationLoading.value = false
+  }, 900)
+}
+onUnmounted(() => clearTimeout(paginationTimer))
+const toolFilterPreview = ref('all')
+const toolFilterOptions = computed(() => [
+  { value: 'all', label: uiText('tools.all'), count: 194 },
+  { value: 'online', label: uiText('tools.online'), count: 193 },
+  { value: 'downloaded', label: uiText('tools.downloaded'), count: 2 },
+  { value: 'unavailable', label: uiText('tools.unavailable'), count: 0 }
+])
+const longToolFilterOptions = computed(() => [
+  { value: 'all', label: uiText('ui.vertexCommunityLongInstallationSourceNameWithEnglishMixedTextWithoutSpaces0123456789'), count: 194 },
+  { value: 'online', label: uiText('tools.online'), count: 0 }
+])
 const validationPreview = ref(false)
 const stressValue = ref('long')
 const stressOptions = [
@@ -290,6 +315,15 @@ defineOptions({ name: 'DevUiComponents' })
             <VxButton loading>{{ $t('ui.saveSettings') }}</VxButton>
             <VxButton disabled>{{ $t('tools.unavailable') }}</VxButton>
           </div>
+          <div class="component-lab-control-grid">
+            <ToolCoverCard
+              v-for="state in ['ready', 'disabled', 'loading']"
+              :key="state"
+              :title="$t(state === 'loading' ? 'tools.downloading' : state === 'disabled' ? 'tools.unavailable' : 'tools.flingTrainer')"
+              monogram="FL"
+              :quick="{ label: $t('tools.download'), icon: 'download', disabled: state === 'disabled', busy: state === 'loading' }"
+            />
+          </div>
         </section>
 
         <section class="component-panel">
@@ -371,6 +405,25 @@ defineOptions({ name: 'DevUiComponents' })
             </div>
           </div>
           <div class="component-lab-control-grid">
+            <div class="component-lab-field component-lab-field-wide">
+              <span>{{ $t('tools.filterByStatus') }}</span>
+              <ToolFilterPills v-model="toolFilterPreview" variant="accent" :options="toolFilterOptions" :label="$t('tools.filterByStatus')" />
+              <ToolFilterPills v-model="toolFilterPreview" variant="accent" :options="toolFilterOptions" :label="$t('tools.unavailable')" disabled />
+              <ToolFilterPills v-model="toolFilterPreview" variant="accent" :options="longToolFilterOptions" :label="$t('ui.selectionAndStates')" />
+            </div>
+            <div class="component-lab-field component-lab-field-wide">
+              <span>{{ $t('pagination.label') }}</span>
+              <Pagination
+                v-for="pages in [12, 0]"
+                :key="pages"
+                :current="paginationPreview"
+                :pages="pages"
+                :size="20"
+                :current-count="20"
+                :loading="paginationLoading"
+                @change="previewPaginationChange"
+              />
+            </div>
             <div class="component-lab-field">
               <span>{{ $t('ui.configurationType') }}</span>
               <VxRadioGroup v-model="form.profileType" :options="radioOptions" />

@@ -261,9 +261,9 @@ $warning-text: color-mix(in srgb, var(--color-warning) 50%, var(--color-black));
   white-space: nowrap;
   background: var(--color-accent);
   border: 0;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-md);
   outline: none;
-  box-shadow: 0 6px 16px -6px rgba(10, 150, 255, 0.6);
+  box-shadow: var(--shadow-sm);
   cursor: pointer;
   opacity: 0;
   transform: translateY(4px);
@@ -275,6 +275,10 @@ $warning-text: color-mix(in srgb, var(--color-warning) 50%, var(--color-black));
 
   &:hover:not(:disabled) {
     background: var(--color-accent-hover);
+  }
+
+  &:active:not(:disabled) {
+    background: var(--color-accent-active);
   }
 
   &:focus-visible {
