@@ -1,0 +1,2 @@
+# 上游许可证按原始字节锁定 SHA-256，禁止 Windows 检出时转换换行。
+resources/licenses/npm-upstream/*.txt -text
