@@ -29,5 +29,4 @@ Electron/Chromium 发行物自带的 `LICENSE` 和 `LICENSES.chromium.html` 同�
 
 ## 原生模块
 
-`resources/node/*.node` 来自独立的 Vertex Node API 源码仓库：https://gitee.com/YuQiKzz/vertex-node-api 。
-构建参考见 `NATIVE_BUILD.md`。第三方 7-Zip 文件采用上文所列许可。
+Vertex Node API 源码已公开于 [GitHub](https://github.com/xyuqikzz/vertex-node-api)，自有代码采用 GPL-3.0-only。当前公开快照尚不包含客户端随附 `.node` 的全部接口，不能作为这些二进制已完成源码对应验证的声明；版本差异、工具链限制和接入条件见 [NATIVE_BUILD.md](./NATIVE_BUILD.md)。第三方 7-Zip 文件采用上文所列许可。

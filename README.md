@@ -102,7 +102,7 @@ npm run dev
 
 普通构建直接使用 [resources/node](./resources/node) 中的原生模块，不自动重建或替换它们。只有需要更新原生能力时，才先从匹配版本的原生源码构建，再运行 `node scripts/sync-node-api.cjs --check` 检查，最后通过 `npm run sync:napi` 同步；其他源码位置可由 `VERTEX_NODE_API_ROOT` 指定。
 
-原生源码仓库与构建边界见 [NATIVE_BUILD.md](./NATIVE_BUILD.md)。Windows 打包固定使用 electron-builder 26.18.1；打包钩子包含该版本 npm 依赖 JSON 输出的兼容处理，升级构建器时需一并复核。
+原生源码已在 [GitHub](https://github.com/xyuqikzz/vertex-node-api) 开源；公开快照与当前随包原生模块存在接口差异，构建及兼容性边界见 [NATIVE_BUILD.md](./NATIVE_BUILD.md)。Windows 打包固定使用 electron-builder 26.18.1；打包钩子包含该版本 npm 依赖 JSON 输出的兼容处理，升级构建器时需一并复核。
 
 Steam 工具的源码包、许可证和摘要清单位于 [resources/workshop](./resources/workshop)。需要重建时使用 `node scripts/build-workshop-tool.mjs`；这一步另需匹配上游项目要求的 .NET SDK，并会更新工具包和摘要清单。
 
@@ -245,7 +245,7 @@ The [Build Windows workflow](./.github/workflows/build-windows.yml) runs when a 
 
 Normal builds use the native modules in [resources/node](./resources/node) without rebuilding or replacing them. To update native functionality, build matching native sources first, validate them with `node scripts/sync-node-api.cjs --check`, then run `npm run sync:napi`. Set `VERTEX_NODE_API_ROOT` when the native project is in a different location.
 
-See [NATIVE_BUILD.md](./NATIVE_BUILD.md) for the native source repository and build limitations. Windows packaging pins electron-builder to 26.18.1. Its packaging hook handles extra text around npm's dependency JSON for this version; review that compatibility handling when upgrading the builder.
+The native source is open on [GitHub](https://github.com/xyuqikzz/vertex-node-api). The published snapshot has interface differences from the bundled binaries; see [NATIVE_BUILD.md](./NATIVE_BUILD.md) for build and compatibility limitations. Windows packaging pins electron-builder to 26.18.1. Its packaging hook handles extra text around npm's dependency JSON for this version; review that compatibility handling when upgrading the builder.
 
 The Steam tool's source archive, license, and hash manifest are in [resources/workshop](./resources/workshop). Rebuild it with `node scripts/build-workshop-tool.mjs` when needed. This requires a .NET SDK compatible with the upstream project and updates the tool archive and hash manifests.
 
